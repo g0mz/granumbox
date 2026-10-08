@@ -1,16 +1,18 @@
 import { Redis } from "@upstash/redis";
+import { ATRIBUTOS, type Perfil } from "./data";
 
 export type Avaliacao = {
   id: string;
   loteId: string;
-  nota: number; // 1–5
+  nota: number; // 1 a 5
+  perfil: Partial<Perfil>;
   comentario: string;
   nome: string;
   cidade: string;
   criadaEm: string;
 };
 
-// Usa Upstash Redis quando configurado (Vercel → Storage), senão memória local para dev.
+// Usa Upstash Redis quando configurado (Vercel > Storage), senão memória local para dev.
 const url = process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
 const token = process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN;
 const redis = url && token ? new Redis({ url, token }) : null;
@@ -33,5 +35,10 @@ export async function salvarAvaliacao(a: Avaliacao) {
 export function resumo(avaliacoes: Avaliacao[]) {
   const total = avaliacoes.length;
   const media = total ? avaliacoes.reduce((s, a) => s + a.nota, 0) / total : 0;
-  return { total, media };
+  const perfil: Partial<Perfil> = {};
+  for (const { chave } of ATRIBUTOS) {
+    const vals = avaliacoes.map((a) => a.perfil?.[chave]).filter((v): v is number => !!v);
+    if (vals.length) perfil[chave] = vals.reduce((s, v) => s + v, 0) / vals.length;
+  }
+  return { total, media, perfil };
 }

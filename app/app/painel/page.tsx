@@ -1,97 +1,117 @@
 import Image from "next/image";
 import Link from "next/link";
-import { headers } from "next/headers";
 import QRCode from "qrcode";
-import { produtor } from "@/lib/data";
+import { produtor, sca } from "@/lib/data";
+import { urlDoLote } from "@/lib/origem";
 import { listarAvaliacoes, resumo } from "@/lib/store";
-import { Estrelas } from "@/components/Estrelas";
+import { FichaProva } from "@/components/FichaProva";
+import { Nota } from "@/components/Nota";
 
 export const dynamic = "force-dynamic";
 
 export default async function Painel() {
-  const h = await headers();
-  const origem = `${h.get("x-forwarded-proto") ?? "http"}://${h.get("host")}`;
   const todas = await listarAvaliacoes();
   const geral = resumo(todas);
 
   const lotes = await Promise.all(
     produtor.lotes.map(async (l) => {
-      const url = `${origem}/p/${l.id}?c=${l.codigo}`;
-      const qr = await QRCode.toDataURL(url, { width: 600, margin: 2, color: { dark: "#4a220a" } });
-      const avs = todas.filter((a) => a.loteId === l.id);
-      return { ...l, url, qr, ...resumo(avs) };
+      const url = await urlDoLote(l);
+      const png = await QRCode.toDataURL(url, { width: 900, margin: 2, color: { dark: "#2e1606" } });
+      return { ...l, url, png, ...resumo(todas.filter((a) => a.loteId === l.id)) };
     }),
   );
 
   return (
-    <main className="mx-auto max-w-5xl px-6 py-8">
-      <header className="flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 font-serif text-lg text-cafe">
-          <Image src="/logo.svg" alt="" width={32} height={32} className="rounded-md" />
+    <main className="mx-auto max-w-6xl px-4 pb-20 sm:px-6">
+      <nav className="flex h-16 items-center justify-between">
+        <Link href="/" className="flex items-center gap-2 font-semibold">
+          <Image src="/logo.svg" alt="" width={32} height={32} />
           GranumBox
         </Link>
-        <span className="rounded-full bg-areia px-3 py-1 text-sm">Plano Safra · ativo</span>
+        <span className="font-mono text-sm text-tinta-2">Plano Safra</span>
+      </nav>
+
+      <header className="mt-8 flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <h1 className="font-stencil text-5xl font-black uppercase leading-none sm:text-6xl">{produtor.fazenda}</h1>
+          <p className="mt-2 text-tinta-2">
+            {produtor.nome}, {produtor.cidade} ({produtor.uf})
+          </p>
+        </div>
+        <dl className="flex gap-10 font-mono">
+          <div>
+            <dt className="text-xs text-tinta-2">Nota média</dt>
+            <dd className="text-3xl">{geral.total ? geral.media.toFixed(1).replace(".", ",") : "-"}</dd>
+          </div>
+          <div>
+            <dt className="text-xs text-tinta-2">Avaliações</dt>
+            <dd className="text-3xl">{geral.total}</dd>
+          </div>
+        </dl>
       </header>
 
-      <h1 className="mt-10 font-serif text-3xl">{produtor.fazenda}</h1>
-      <p className="text-cafe">{produtor.nome} · {produtor.cidade}</p>
-
-      <div className="mt-8 grid gap-4 sm:grid-cols-3">
-        <Stat rotulo="Nota média" valor={geral.total ? geral.media.toFixed(1) : "—"} />
-        <Stat rotulo="Avaliações verificadas" valor={String(geral.total)} />
-        <Stat rotulo="Lotes rastreados" valor={String(produtor.lotes.length)} />
-      </div>
-
-      <h2 className="mt-12 font-serif text-2xl">Seus lotes</h2>
-      <div className="mt-4 grid gap-6 md:grid-cols-2">
+      <div className="mt-10 space-y-px">
         {lotes.map((l) => (
-          <article key={l.id} className="flex gap-4 rounded-2xl bg-white p-5 shadow-sm">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={l.qr} alt={`QR do lote ${l.nome}`} className="size-32 shrink-0 rounded-lg" />
-            <div className="min-w-0">
-              <h3 className="font-medium">{l.nome}</h3>
-              <p className="text-sm opacity-70">Safra {l.safra} · {l.processo}</p>
-              <p className="mt-2 text-sm">
-                {l.total ? <><Estrelas nota={l.media} /> {l.media.toFixed(1)} ({l.total})</> : "Sem avaliações ainda"}
-              </p>
-              <div className="mt-3 flex flex-wrap gap-3 text-sm">
-                <a href={l.qr} download={`granumbox-${l.id}.png`} className="font-medium text-cafe underline">
-                  Baixar QR
-                </a>
-                <a href={l.url} target="_blank" className="text-cafe underline">
-                  Ver página
-                </a>
-              </div>
+          <article key={l.id} className="grid gap-8 bg-papel p-6 md:grid-cols-[auto_1fr_1.2fr] md:p-8">
+            <div className="flex flex-col items-start gap-3">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={l.png} alt={`QR do lote ${l.marcacao}`} className="size-36 bg-white" />
+              <a href={l.png} download={`granumbox-${l.marcacao}.png`} className="apertar rounded-sm bg-tinta px-4 py-2 text-sm font-medium text-papel hover:bg-cereja">
+                Baixar QR
+              </a>
             </div>
+            <div>
+              <p className="font-mono text-sm text-tinta-2">Lote {l.marcacao}</p>
+              <h2 className="mt-1 text-xl font-semibold">
+                {l.variedade}, {l.processo.toLowerCase()}
+              </h2>
+              <p className="mt-1 text-tinta-2">
+                {l.talhao}, safra {l.safra}
+                {l.pontuacaoSCA && `, ${sca(l.pontuacaoSCA)} pts`}
+              </p>
+              <p className="mt-4 flex items-center gap-3">
+                {l.total ? (
+                  <>
+                    <Nota valor={l.media} />
+                    <span className="font-mono text-sm">
+                      {l.media.toFixed(1).replace(".", ",")} em {l.total} {l.total === 1 ? "avaliação" : "avaliações"}
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-sm text-tinta-2">Nenhuma avaliação ainda. Imprima o QR e coloque nos pacotes.</span>
+                )}
+              </p>
+              <Link href={l.url} target="_blank" className="mt-4 inline-block text-sm font-medium underline underline-offset-4">
+                Abrir a página do lote
+              </Link>
+            </div>
+            <FichaProva consumidor={l.perfil} ficha={l.perfilFicha} />
           </article>
         ))}
       </div>
 
-      <h2 className="mt-12 font-serif text-2xl">Últimas avaliações</h2>
-      {todas.length === 0 && <p className="mt-4 opacity-70">Assim que alguém escanear e avaliar, aparece aqui.</p>}
-      <ul className="mt-4 divide-y divide-cafe/10 rounded-2xl bg-white shadow-sm">
-        {todas.slice(0, 20).map((a) => (
-          <li key={a.id} className="p-4">
-            <div className="flex items-center justify-between gap-4">
-              <Estrelas nota={a.nota} />
-              <span className="text-xs opacity-60">
-                {produtor.lotes.find((l) => l.id === a.loteId)?.nome} · {new Date(a.criadaEm).toLocaleString("pt-BR")}
-              </span>
-            </div>
-            {a.comentario && <p className="mt-1">{a.comentario}</p>}
-            <p className="text-sm opacity-70">{a.nome}{a.cidade && ` · ${a.cidade}`}</p>
-          </li>
-        ))}
-      </ul>
+      <section className="mt-12">
+        <h2 className="text-2xl font-semibold">Últimas avaliações</h2>
+        {todas.length === 0 ? (
+          <p className="mt-3 text-tinta-2">Quando alguém escanear um pacote e avaliar, a nota aparece aqui.</p>
+        ) : (
+          <ul className="mt-5 divide-y divide-linha border-y border-linha">
+            {todas.slice(0, 20).map((a) => (
+              <li key={a.id} className="grid gap-1 py-4 md:grid-cols-[8rem_7rem_1fr_auto] md:items-baseline md:gap-6">
+                <span className="font-mono text-sm">{produtor.lotes.find((l) => l.id === a.loteId)?.marcacao}</span>
+                <Nota valor={a.nota} />
+                <span>
+                  {a.comentario || <span className="text-tinta-2">Sem comentário</span>}
+                  {(a.nome || a.cidade) && (
+                    <span className="text-tinta-2"> ({[a.nome, a.cidade].filter(Boolean).join(", ")})</span>
+                  )}
+                </span>
+                <span className="font-mono text-xs text-tinta-2">{new Date(a.criadaEm).toLocaleString("pt-BR")}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </main>
-  );
-}
-
-function Stat({ rotulo, valor }: { rotulo: string; valor: string }) {
-  return (
-    <div className="rounded-2xl bg-white p-5 shadow-sm">
-      <p className="text-sm text-cafe/70">{rotulo}</p>
-      <p className="mt-1 font-serif text-4xl text-cafe">{valor}</p>
-    </div>
   );
 }

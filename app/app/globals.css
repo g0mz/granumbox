@@ -1,16 +1,88 @@
 @import "tailwindcss";
 
+/* Kraft da embalagem + tinta de estêncil de saca + vermelho de cereja madura. Cantos retos em tudo. */
+:root {
+  --kraft: #c9a87e;
+  --papel: #f7f6f2;
+  --tinta: #2e1606;
+  --tinta-2: #5a2e10;
+  --cereja: #b3261e;
+  --linha: rgb(46 22 6 / 0.22);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --kraft: #24180e;
+    --papel: #33251a;
+    --tinta: #efe2cf;
+    --tinta-2: #cfae86;
+    --cereja: #e3685c;
+    --linha: rgb(239 226 207 / 0.18);
+  }
+}
+
 @theme inline {
-  --color-cafe: #773811;
-  --color-cafe-escuro: #4a220a;
-  --color-creme: #fcfaf6;
-  --color-areia: #f1e8dc;
-  --color-tinta: #2a1a10;
-  --font-sans: var(--font-sans-app);
-  --font-serif: var(--font-serif-app);
+  --color-kraft: var(--kraft);
+  --color-papel: var(--papel);
+  --color-tinta: var(--tinta);
+  --color-tinta-2: var(--tinta-2);
+  --color-cereja: var(--cereja);
+  --color-linha: var(--linha);
+  --font-sans: var(--font-archivo);
+  --font-stencil: var(--font-stencil);
+  --font-mono: var(--font-plex-mono);
+  --radius-sm: 2px;
 }
 
 body {
-  background: var(--color-creme);
-  color: var(--color-tinta);
+  background: var(--kraft);
+  color: var(--tinta);
+}
+
+/* fibra do kraft: camada fixa, sem custo de repaint no scroll */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image:
+    repeating-linear-gradient(97deg, rgb(0 0 0 / 0.025) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(3deg, rgb(255 255 255 / 0.03) 0 1px, transparent 1px 11px);
+}
+
+:focus-visible {
+  outline: 2px solid var(--cereja);
+  outline-offset: 2px;
+}
+
+.carimbo {
+  animation: carimbo 420ms var(--ease-out) both;
+}
+@keyframes carimbo {
+  from {
+    opacity: 0;
+    transform: rotate(var(--giro, 0deg)) scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(var(--giro, 0deg)) scale(1);
+  }
+}
+
+.apertar {
+  transition: transform 140ms var(--ease-out), background-color 160ms ease, color 160ms ease;
+}
+.apertar:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carimbo {
+    animation: none;
+  }
+  .apertar:active {
+    transform: none;
+  }
 }
