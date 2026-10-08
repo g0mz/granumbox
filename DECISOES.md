@@ -4,6 +4,8 @@ Registro curto do que foi decidido e por quê. Adicione no topo, com data.
 
 ## 2026-10-08
 
+**Deploy na Cloudflare via OpenNext (Workers, não Pages).** O site renderiza no servidor (home dinâmica, rotas de API, Redis), e o Pages só serve arquivos estáticos. Adicionados `@opennextjs/cloudflare`, `wrangler.jsonc` (worker `granumbox`) e os scripts `preview`/`deploy`; Next subiu para 15.5.27 (exigência do adaptador). Sem otimizador de imagem no Workers: `images.unoptimized` e os PNGs do produto viraram WebP de ~100 KB. Substitui "deploy adiado".
+
 **A página inicial é só para o cliente** (correção da equipe). Saiu a seção "Para cooperativas" e o link "Curadoria" do menu (continua no rodapé, em "Equipe", para a demo). No lugar: "Um só lugar: o Norte Pioneiro.", com o muro de cidades ao fundo e a ficha de origem do lote (sítio, cidade, talhão, altitude, variedade, SCA). A conversa com cooperativas fica fora do site do consumidor.
 
 **"Quem já provou" virou mural e "Cooperativas" virou muro de cidades + tabela** (escolhas da equipe). Mural: 4 cartões; avaliações reais ocupam os primeiros, o resto fica pontilhado ("a sua pode ser a primeira"), nunca depoimento inventado. Cooperativas: nomes de municípios do Norte Pioneiro ao fundo (Pinhalão, onde já há parceiro, em destaque) e por cima a tabela "Vocês entregam × Vocês recebem". A lista de municípios ainda precisa ser conferida pela equipe.

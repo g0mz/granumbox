@@ -17,7 +17,7 @@ export function DemoProva({ marcacao, fazenda, cidade }: { marcacao: string; faz
     <div className="relative mx-auto h-[31rem] w-full max-w-[30rem]">
       {/* Cartão do lote com o QR, de onde a avaliação começa */}
       <Image
-        src="/produto/cartao.png"
+        src="/produto/cartao.webp"
         alt="Cartão do lote com QR"
         width={1024}
         height={1536}

@@ -18,7 +18,7 @@ function Pacote({ c }: { c: Cafe }) {
   return (
     <div className="relative w-full [container-type:inline-size]">
       <Image
-        src="/produto/pacote.png"
+        src="/produto/pacote.webp"
         alt={`Pacote GranumBox de ${c.variedade}, ${c.fazenda}, ${c.cidade}`}
         width={1122}
         height={1402}

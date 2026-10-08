@@ -57,21 +57,21 @@ const etapas = [
     dado: "Lote 26-AM-07",
     titulo: "Embalamos com a história",
     texto: "Rótulo com sítio, altitude e notas, e um QR do lote.",
-    objeto: <Image src="/produto/pacote.png" alt="Pacote GranumBox" width={1122} height={1402} sizes="120px" className={`h-auto w-full lg:h-36 lg:w-auto ${sombra}`} />,
+    objeto: <Image src="/produto/pacote.webp" alt="Pacote GranumBox" width={1122} height={1402} sizes="120px" className={`h-auto w-full lg:h-36 lg:w-auto ${sombra}`} />,
   },
   {
     pos: "left-[50%] top-[88%]",
     dado: "Frete incluso",
     titulo: "Chega na sua porta",
     texto: "Uma caixa por mês. Pause ou cancele quando quiser.",
-    objeto: <Image src="/produto/caixa.png" alt="Caixa GranumBox" width={1412} height={1114} sizes="200px" className={`h-auto w-full lg:w-44 ${sombra}`} />,
+    objeto: <Image src="/produto/caixa.webp" alt="Caixa GranumBox" width={1412} height={1114} sizes="200px" className={`h-auto w-full lg:w-44 ${sombra}`} />,
   },
   {
     pos: "left-[12%] top-[50%]",
     dado: "QR do lote",
     titulo: "Sua nota volta ao sítio",
     texto: "Você escaneia, prova e avalia. A opinião chega ao produtor.",
-    objeto: <Image src="/produto/cartao.png" alt="Cartão do lote com QR" width={1024} height={1536} sizes="100px" className={`h-auto w-full -rotate-3 lg:h-32 lg:w-auto ${sombra}`} />,
+    objeto: <Image src="/produto/cartao.webp" alt="Cartão do lote com QR" width={1024} height={1536} sizes="100px" className={`h-auto w-full -rotate-3 lg:h-32 lg:w-auto ${sombra}`} />,
   },
 ];
 
@@ -210,7 +210,7 @@ export default async function Home() {
           <div className="relative mt-14 md:mt-6 md:h-[40rem]">
             {/* Caixa ao fundo */}
             <figure className="relative md:absolute md:left-0 md:top-10 md:w-[58%]">
-              <Image src="/produto/caixa.png" alt="Caixa preta GranumBox com o logo em cobre e a frase clube de cafés especiais" width={1412} height={1114} sizes="(min-width: 768px) 58vw, 100vw" className="h-auto w-full drop-shadow-[0_40px_40px_rgb(31_18_9/0.35)]" />
+              <Image src="/produto/caixa.webp" alt="Caixa preta GranumBox com o logo em cobre e a frase clube de cafés especiais" width={1412} height={1114} sizes="(min-width: 768px) 58vw, 100vw" className="h-auto w-full drop-shadow-[0_40px_40px_rgb(31_18_9/0.35)]" />
               <Legenda className="md:absolute md:-top-6 md:left-[8%]" dado="A caixa">
                 Chega pelo correio, frete incluso. Vira porta-pacote na bancada.
               </Legenda>
@@ -218,7 +218,7 @@ export default async function Home() {
 
             {/* Pacote na frente, encostado na caixa */}
             <figure className="relative mt-12 md:absolute md:bottom-0 md:left-[44%] md:mt-0 md:w-[27%]">
-              <Image src="/produto/pacote.png" alt="Pacote kraft GranumBox, Reserva da Serra, Carlópolis, Norte Pioneiro do Paraná, 250 g" width={1122} height={1402} sizes="(min-width: 768px) 27vw, 70vw" className="mx-auto h-auto w-2/3 drop-shadow-[0_30px_30px_rgb(31_18_9/0.4)] md:w-full" />
+              <Image src="/produto/pacote.webp" alt="Pacote kraft GranumBox, Reserva da Serra, Carlópolis, Norte Pioneiro do Paraná, 250 g" width={1122} height={1402} sizes="(min-width: 768px) 27vw, 70vw" className="mx-auto h-auto w-2/3 drop-shadow-[0_30px_30px_rgb(31_18_9/0.4)] md:w-full" />
               <Legenda className="md:absolute md:bottom-4 md:left-[-78%] md:w-[13rem]" dado="250 g · 100% arábica">
                 Um pacote por produtor, com cidade, altitude, torra e notas no rótulo.
               </Legenda>
@@ -226,7 +226,7 @@ export default async function Home() {
 
             {/* Cartão do lote à direita */}
             <figure className="relative mt-12 md:absolute md:right-0 md:top-0 md:mt-0 md:w-[24%]">
-              <Image src="/produto/cartao.png" alt="Cartão do lote com a história da família produtora e um QR para avaliar o café" width={1024} height={1536} sizes="(min-width: 768px) 24vw, 70vw" className="mx-auto h-auto w-2/3 rotate-2 drop-shadow-[0_24px_24px_rgb(31_18_9/0.3)] md:w-full" />
+              <Image src="/produto/cartao.webp" alt="Cartão do lote com a história da família produtora e um QR para avaliar o café" width={1024} height={1536} sizes="(min-width: 768px) 24vw, 70vw" className="mx-auto h-auto w-2/3 rotate-2 drop-shadow-[0_24px_24px_rgb(31_18_9/0.3)] md:w-full" />
               <Legenda className="md:absolute md:-bottom-24 md:right-0 md:w-[15rem]" dado="QR do lote">
                 O cartão conta a história do sítio. O QR abre a ficha para você avaliar.
               </Legenda>
@@ -302,7 +302,7 @@ export default async function Home() {
                   {Array.from({ length: p.pacotes }).map((_, i) => (
                     <Image
                       key={i}
-                      src="/produto/pacote.png"
+                      src="/produto/pacote.webp"
                       alt=""
                       width={1122}
                       height={1402}
