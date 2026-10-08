@@ -36,7 +36,7 @@ export default async function PaginaLote({
       </div>
 
       <div className="mt-8 space-y-px">
-        <section className="bg-papel px-5 py-7">
+        <section className="bg-caixa px-5 py-7">
           <h1 className="text-2xl font-semibold tracking-tight">
             {lote.variedade} do {lote.talhao}
           </h1>
@@ -45,7 +45,7 @@ export default async function PaginaLote({
           </p>
           <ul className="mt-5 flex flex-wrap gap-2">
             {lote.notasSensoriais.map((n) => (
-              <li key={n} className="rounded-sm border border-linha px-3 py-1.5 text-sm">
+              <li key={n} className="rounded-full bg-fundo px-3 py-1.5 text-sm">
                 {n}
               </li>
             ))}
@@ -65,7 +65,7 @@ export default async function PaginaLote({
           </dl>
         </section>
 
-        <section className="bg-papel px-5 py-7">
+        <section className="bg-caixa px-5 py-7">
           <h2 className="text-lg font-semibold">
             {produtor.nome}, desde {produtor.desde}
           </h2>
@@ -77,7 +77,7 @@ export default async function PaginaLote({
           <p className="mt-5 text-sm text-tinta-2">{produtor.praticas.join(", ")}.</p>
         </section>
 
-        <section className="bg-papel px-5 py-7">
+        <section className="bg-caixa px-5 py-7">
           <div className="flex items-baseline justify-between gap-4">
             <h2 className="text-lg font-semibold">Como este lote está na xícara</h2>
             {total > 0 && (
@@ -96,13 +96,13 @@ export default async function PaginaLote({
           </div>
         </section>
 
-        <section id="avaliar" className="bg-papel px-5 py-7">
+        <section id="avaliar" className="bg-caixa px-5 py-7">
           <h2 className="mb-5 text-lg font-semibold">Avaliar este lote</h2>
           <FormAvaliacao loteId={lote.id} codigo={c === lote.codigo ? c : undefined} />
         </section>
 
         {avaliacoes.length > 0 && (
-          <section className="bg-papel px-5 py-7">
+          <section className="bg-caixa px-5 py-7">
             <h2 className="text-lg font-semibold">O que disseram</h2>
             <p className="mt-1 text-sm text-tinta-2">
               Só avalia quem escaneou o pacote, e o produtor não consegue apagar nenhuma avaliação.

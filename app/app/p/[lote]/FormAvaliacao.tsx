@@ -28,8 +28,8 @@ function Escala({
             aria-pressed={valor === i}
             aria-label={`${rotulo}: ${i} de 5`}
             onClick={() => onChange(i)}
-            className={`apertar h-11 rounded-sm border font-mono text-sm ${
-              valor === i ? "border-cereja bg-cereja text-papel" : "border-linha hover:border-tinta"
+            className={`apertar h-11 rounded-xl border font-mono text-sm ${
+              valor === i ? "border-marca bg-marca text-white" : "border-linha hover:border-tinta"
             }`}
           >
             {i}
@@ -53,7 +53,7 @@ export function FormAvaliacao({ loteId, codigo }: { loteId: string; codigo?: str
 
   if (!codigo) {
     return (
-      <p className="border-l-2 border-cereja pl-4 text-tinta-2">
+      <p className="border-l-2 border-marca pl-4 text-tinta-2">
         Para avaliar, escaneie o QR impresso no pacote. Só quem tem o café em mãos pode dar nota.
       </p>
     );
@@ -61,7 +61,7 @@ export function FormAvaliacao({ loteId, codigo }: { loteId: string; codigo?: str
 
   if (estado === "enviada") {
     return (
-      <p className="border-l-2 border-cereja pl-4">
+      <p className="border-l-2 border-marca pl-4">
         Avaliação enviada. A Família Moreira recebe sua nota junto com as de todo mundo que provou este lote.
       </p>
     );
@@ -88,7 +88,7 @@ export function FormAvaliacao({ loteId, codigo }: { loteId: string; codigo?: str
   }
 
   const campo =
-    "mt-1.5 w-full rounded-sm border border-linha bg-papel px-3 py-2.5 text-base outline-none placeholder:text-tinta-2/70 focus:border-tinta";
+    "mt-1.5 w-full rounded-xl border border-linha bg-fundo px-3 py-2.5 text-base outline-none placeholder:text-tinta-2/70 focus:border-tinta";
 
   return (
     <form onSubmit={enviar} className="space-y-6">
@@ -126,13 +126,13 @@ export function FormAvaliacao({ loteId, codigo }: { loteId: string; codigo?: str
       </div>
 
       {erro && (
-        <p role="alert" className="text-sm font-medium text-cereja">
+        <p role="alert" className="text-sm font-medium text-marca">
           {erro}
         </p>
       )}
       <button
         disabled={estado === "enviando"}
-        className="apertar h-12 w-full rounded-sm bg-tinta font-medium text-papel hover:bg-cereja disabled:opacity-60"
+        className="apertar h-12 w-full rounded-full bg-marca font-medium text-white hover:bg-marca-forte disabled:opacity-60"
       >
         {estado === "enviando" ? "Enviando avaliação" : "Enviar avaliação"}
       </button>

@@ -24,7 +24,7 @@ export default async function Painel() {
   return (
     <main className="mx-auto max-w-6xl px-4 pb-20 sm:px-6">
       <nav className="flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 font-semibold">
+        <Link href="/" className="flex items-center gap-2 font-semibold text-marca">
           <Image src="/logo.svg" alt="" width={32} height={32} />
           GranumBox
         </Link>
@@ -33,7 +33,7 @@ export default async function Painel() {
 
       <header className="mt-8 flex flex-wrap items-end justify-between gap-6">
         <div>
-          <h1 className="font-stencil text-5xl font-black uppercase leading-none sm:text-6xl">{produtor.fazenda}</h1>
+          <h1 className="font-display text-5xl text-marca leading-none sm:text-6xl">{produtor.fazenda}</h1>
           <p className="mt-2 text-tinta-2">
             {produtor.nome}, {produtor.cidade} ({produtor.uf})
           </p>
@@ -52,11 +52,11 @@ export default async function Painel() {
 
       <div className="mt-10 space-y-px">
         {lotes.map((l) => (
-          <article key={l.id} className="grid gap-8 bg-papel p-6 md:grid-cols-[auto_1fr_1.2fr] md:p-8">
+          <article key={l.id} className="grid gap-8 bg-caixa p-6 md:grid-cols-[auto_1fr_1.2fr] md:p-8">
             <div className="flex flex-col items-start gap-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={l.png} alt={`QR do lote ${l.marcacao}`} className="size-36 bg-white" />
-              <a href={l.png} download={`granumbox-${l.marcacao}.png`} className="apertar rounded-sm bg-tinta px-4 py-2 text-sm font-medium text-papel hover:bg-cereja">
+              <a href={l.png} download={`granumbox-${l.marcacao}.png`} className="apertar rounded-full bg-marca px-4 py-2 text-sm font-medium text-white hover:bg-marca-forte">
                 Baixar QR
               </a>
             </div>

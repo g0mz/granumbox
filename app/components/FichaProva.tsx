@@ -26,14 +26,14 @@ export function FichaProva({ consumidor, ficha }: { consumidor: Partial<Perfil>;
                 </div>
                 {f && (
                   <span
-                    className="absolute top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rotate-45 border-2 border-tinta"
+                    className="absolute top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-tinta"
                     style={{ left: pos(f) }}
                     title={`Ficha do produtor: ${f}`}
                   />
                 )}
                 {c && (
                   <span
-                    className="absolute top-1/2 size-3.5 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-cereja"
+                    className="absolute top-1/2 size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-marca"
                     style={{ left: pos(c) }}
                     title={`Média de quem bebeu: ${c.toFixed(1)}`}
                   />
@@ -49,11 +49,11 @@ export function FichaProva({ consumidor, ficha }: { consumidor: Partial<Perfil>;
       </ul>
       <p className="mt-5 flex flex-wrap gap-x-5 gap-y-1 text-sm text-tinta-2">
         <span className="flex items-center gap-2">
-          <span className="size-2.5 rotate-45 bg-cereja" /> quem bebeu
+          <span className="size-2.5 rounded-full bg-marca" /> quem bebeu
         </span>
         {ficha && (
           <span className="flex items-center gap-2">
-            <span className="size-2.5 rotate-45 border-2 border-tinta" /> ficha do produtor
+            <span className="size-2.5 rounded-full border-2 border-tinta" /> ficha do produtor
           </span>
         )}
       </p>

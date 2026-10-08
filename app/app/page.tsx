@@ -27,28 +27,28 @@ export default async function Home() {
   return (
     <main>
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <span className="flex items-center gap-2 font-semibold">
+        <span className="flex items-center gap-2 font-semibold text-marca">
           <Image src="/logo.svg" alt="" width={32} height={32} />
           GranumBox
         </span>
-        <Link href="/painel" className="apertar rounded-sm border border-tinta px-4 py-2 text-sm font-medium hover:bg-tinta hover:text-papel">
+        <Link href="/painel" className="apertar rounded-full border border-marca text-marca px-4 py-2 text-sm font-medium hover:bg-marca hover:text-white">
           Painel do produtor
         </Link>
       </nav>
 
       <section className="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-20 pt-10 sm:px-6 md:grid-cols-[1.1fr_1fr] md:pt-16">
         <div>
-          <h1 className="text-[2.6rem] font-semibold leading-[1.02] tracking-[-0.02em] [font-stretch:88%] sm:text-6xl">
+          <h1 className="text-[2.6rem] font-semibold leading-[1.02] tracking-[-0.03em] sm:text-6xl">
             O café sai do sítio com nome e sobrenome.
           </h1>
           <p className="mt-6 max-w-[34ch] text-lg leading-relaxed text-tinta-2">
             Um QR no pacote mostra o lote e quem plantou. A nota de quem bebeu volta para o produtor.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href={url} className="apertar rounded-sm bg-tinta px-6 py-3.5 font-medium text-papel hover:bg-cereja">
+            <Link href={url} className="apertar rounded-full bg-marca px-6 py-3.5 font-medium text-white hover:bg-marca-forte">
               Abrir o lote de exemplo
             </Link>
-            <a href="#planos" className="apertar rounded-sm border border-tinta px-6 py-3.5 font-medium hover:bg-tinta hover:text-papel">
+            <a href="#planos" className="apertar rounded-full border border-marca text-marca px-6 py-3.5 font-medium hover:bg-marca hover:text-white">
               Ver planos
             </a>
           </div>
@@ -61,7 +61,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="border-y border-linha bg-papel">
+      <section className="border-y border-linha bg-caixa">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <h2 className="max-w-xl text-3xl font-semibold tracking-tight">Do talhão à xícara, e de volta.</h2>
           <ol className="relative mt-12 grid gap-10 md:grid-cols-4 md:gap-6">
@@ -70,7 +70,7 @@ export default async function Home() {
               <li key={t} className="relative pl-7 md:pl-0 md:pt-8">
                 <span
                   aria-hidden
-                  className={`absolute left-0 top-1 size-3.5 rotate-45 md:top-0 ${i === caminho.length - 1 ? "bg-cereja" : "border-2 border-tinta bg-papel"}`}
+                  className={`absolute left-0 top-1 size-3.5 rounded-full md:top-0 ${i === caminho.length - 1 ? "bg-marca" : "border-2 border-tinta bg-caixa"}`}
                 />
                 <h3 className="font-semibold">{t}</h3>
                 <p className="mt-2 leading-relaxed text-tinta-2">{d}</p>
@@ -81,7 +81,7 @@ export default async function Home() {
       </section>
 
       <section className="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 md:grid-cols-[1fr_1.1fr] md:items-center">
-        <div className="order-2 bg-papel p-6 sm:p-8 md:order-1">
+        <div className="order-2 bg-caixa p-6 sm:p-8 md:order-1">
           <p className="mb-6 flex items-baseline justify-between font-mono text-xs text-tinta-2">
             <span>Lote {demo.marcacao}</span>
             <span>dados de exemplo</span>
@@ -99,14 +99,14 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="planos" className="border-t border-linha bg-papel">
+      <section id="planos" className="border-t border-linha bg-caixa">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <h2 className="text-3xl font-semibold tracking-tight">Assinatura mensal para o produtor.</h2>
           <p className="mt-3 text-tinta-2">Quem bebe não paga e não instala nada: o QR abre direto no navegador.</p>
           <div className="mt-10 divide-y divide-linha border-y border-linha">
             {planos.map((p) => (
               <div key={p.nome} className="grid gap-2 py-6 md:grid-cols-[12rem_10rem_1fr] md:items-baseline md:gap-8">
-                <h3 className="font-stencil text-3xl font-black uppercase">{p.nome}</h3>
+                <h3 className="font-display text-3xl text-marca">{p.nome}</h3>
                 <p className="font-mono">
                   {p.preco}
                   {p.preco.startsWith("R$") && <span className="text-tinta-2"> /mês</span>}

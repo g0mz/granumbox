@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Archivo, Big_Shoulders_Stencil, IBM_Plex_Mono } from "next/font/google";
+import { Courgette, Poppins, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const archivo = Archivo({ variable: "--font-archivo", subsets: ["latin"], axes: ["wdth"] });
-const stencil = Big_Shoulders_Stencil({ variable: "--font-stencil", subsets: ["latin"], weight: ["700", "900"] });
+const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin"], weight: ["400", "500", "600", "700"] });
+const courgette = Courgette({ variable: "--font-courgette", subsets: ["latin"], weight: "400" });
 const mono = IBM_Plex_Mono({ variable: "--font-plex-mono", subsets: ["latin"], weight: ["400", "500"] });
 
 export const metadata: Metadata = {
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${archivo.variable} ${stencil.variable} ${mono.variable} font-sans antialiased`}>
-        <div className="relative">{children}</div>
+      <body className={`${poppins.variable} ${courgette.variable} ${mono.variable} font-sans antialiased`}>
+        {children}
       </body>
     </html>
   );
