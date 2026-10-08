@@ -1,13 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { planos, reais, type PlanoId } from "@/lib/data";
+import { desconto, periodos, peso, planos, reais, type PeriodoId, type PlanoId } from "@/lib/data";
 
-export function FormAssinatura({ inicial }: { inicial: PlanoId }) {
+export function FormAssinatura({ inicial, periodoInicial }: { inicial: PlanoId; periodoInicial: PeriodoId }) {
   const [plano, setPlano] = useState<PlanoId>(inicial);
+  const [periodo, setPeriodo] = useState<PeriodoId>(periodoInicial);
   const [estado, setEstado] = useState<"livre" | "enviando" | "feito">("livre");
   const [erro, setErro] = useState("");
   const escolhido = planos.find((p) => p.id === plano)!;
+  const meses = periodos.find((p) => p.id === periodo)!.meses;
+  const mes = escolhido.precos[periodo];
 
   async function enviar(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -16,7 +19,7 @@ export function FormAssinatura({ inicial }: { inicial: PlanoId }) {
     const res = await fetch("/api/assinaturas", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ plano, ...Object.fromEntries(new FormData(e.currentTarget)) }),
+      body: JSON.stringify({ plano, periodo, ...Object.fromEntries(new FormData(e.currentTarget)) }),
     });
     if (res.ok) setEstado("feito");
     else {
@@ -28,7 +31,7 @@ export function FormAssinatura({ inicial }: { inicial: PlanoId }) {
   if (estado === "feito") {
     return (
       <div className="mt-10 rounded-2xl bg-caixa p-6" role="status">
-        <p className="text-xl font-semibold">Vaga garantida no plano {escolhido.nome}.</p>
+        <p className="text-xl font-semibold">Vaga garantida no plano {escolhido.nome}, {periodos.find((p) => p.id === periodo)!.nome.toLowerCase()}.</p>
         <p className="mt-2 text-tinta-2">
           Mandamos um e-mail quando a primeira caixa estiver pronta para sair. Nada foi cobrado.
         </p>
@@ -59,14 +62,41 @@ export function FormAssinatura({ inicial }: { inicial: PlanoId }) {
                 {p.nome}
                 <span className="font-normal text-tinta-2">
                   {" "}
-                  · {p.pacotes} {p.pacotes === 1 ? "pacote" : "pacotes"}
+                  · {peso(p.gramas)} por mês
                 </span>
               </span>
-              <span className="font-mono">{reais(p.preco)}/mês</span>
+              <span className="font-mono">{reais(p.precos[periodo])}/mês</span>
               <span className="col-span-2 mt-1 text-sm text-tinta-2">{p.descricao}</span>
             </button>
           ))}
         </div>
+      </fieldset>
+
+      <fieldset>
+        <legend className="font-semibold">Período</legend>
+        <div role="radiogroup" aria-label="Período" className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {periodos.map((p) => {
+            const off = desconto(escolhido, p.id);
+            return (
+              <button
+                key={p.id}
+                type="button"
+                role="radio"
+                aria-checked={periodo === p.id}
+                onClick={() => setPeriodo(p.id)}
+                className={`apertar rounded-2xl border p-3 text-left ${periodo === p.id ? "border-marca bg-caixa" : "border-linha hover:border-marca"}`}
+              >
+                <span className="block font-semibold">{p.nome}</span>
+                <span className="block text-sm text-tinta-2">{off > 0 ? `${off}% de desconto` : "sem desconto"}</span>
+              </button>
+            );
+          })}
+        </div>
+        <p className="mt-3 text-sm text-tinta-2">
+          {meses > 1
+            ? `${reais(mes * meses)} cobrados a cada ${meses} meses (${reais(mes)} por mês).`
+            : "Cobrado todo mês. Pause ou cancele quando quiser."}
+        </p>
       </fieldset>
 
       <div className="grid gap-5 sm:grid-cols-2">
@@ -93,7 +123,7 @@ export function FormAssinatura({ inicial }: { inicial: PlanoId }) {
         disabled={estado === "enviando"}
         className="apertar h-12 w-full rounded-full bg-marca font-medium text-sobre-marca hover:bg-marca-forte disabled:opacity-60"
       >
-        {estado === "enviando" ? "Garantindo vaga" : `Garantir vaga no ${escolhido.nome}, ${reais(escolhido.preco)}/mês`}
+        {estado === "enviando" ? "Garantindo vaga" : `Garantir vaga no ${escolhido.nome}, ${reais(mes)}/mês`}
       </button>
     </form>
   );

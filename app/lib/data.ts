@@ -177,19 +177,48 @@ export const produtorDoLote = (loteId: string) => produtores.find((p) => p.lotes
 
 export const sca = (n: number) => n.toLocaleString("pt-BR", { minimumFractionDigits: 1 });
 
-/* Assinatura: quem paga é o consumidor. Preços são proposta para o pitch. */
-export const planos = [
-  { id: "grao", nome: "Grão", preco: 59, pacotes: 1, descricao: "Um pacote de 250 g por mês, de um produtor diferente a cada edição." },
-  { id: "box", nome: "Box", preco: 109, pacotes: 2, destaque: true, descricao: "Dois pacotes de 250 g de produtores diferentes, para comparar na xícara." },
-  { id: "familia", nome: "Família", preco: 189, pacotes: 4, descricao: "Quatro pacotes de 250 g por mês, para quem toma café todo dia em casa." },
+/* Assinatura: quem paga é o consumidor. Preços são proposta para o pitch.
+   Desconto por fidelidade, pago à vista no início do período: ~5% trimestral, ~10% semestral, ~15% anual. */
+export const periodos = [
+  { id: "mensal", nome: "Mensal", meses: 1 },
+  { id: "trimestral", nome: "Trimestral", meses: 3 },
+  { id: "semestral", nome: "Semestral", meses: 6 },
+  { id: "anual", nome: "Anual", meses: 12 },
 ] as const;
+
+export type PeriodoId = (typeof periodos)[number]["id"];
+
+export const planos = [
+  {
+    id: "grao", nome: "Individual", gramas: 250, pacotes: 1, imagem: "/produto/pacote.webp",
+    descricao: "Um pacote de 250 g por mês, de um produtor diferente a cada edição.",
+    precos: { mensal: 49.9, trimestral: 47.9, semestral: 44.9, anual: 42.9 },
+  },
+  {
+    // Sem foto do pacote de 500 g ainda: usa a do de 250 g, um pouco maior.
+    id: "box", nome: "Box", gramas: 500, pacotes: 1, imagem: "/produto/pacote.webp", destaque: true,
+    descricao: "Um pacote de 500 g por mês, para quem toma café todo dia.",
+    precos: { mensal: 94.9, trimestral: 89.9, semestral: 84.9, anual: 79.9 },
+  },
+  {
+    id: "familia", nome: "Família", gramas: 1000, pacotes: 1, imagem: "/produto/pacote-1kg.webp",
+    descricao: "Um pacote de 1 kg por mês, para a casa toda.",
+    precos: { mensal: 179.9, trimestral: 169.9, semestral: 159.9, anual: 149.9 },
+  },
+] as const;
+
+/** Desconto do período sobre o mensal, em % inteiro. */
+export const desconto = (plano: (typeof planos)[number], periodo: PeriodoId) =>
+  Math.round((1 - plano.precos[periodo] / plano.precos.mensal) * 100);
+
+export const peso = (g: number) => (g >= 1000 ? `${g / 1000} kg` : `${g} g`);
 
 export type PlanoId = (typeof planos)[number]["id"];
 
 /** A caixa do mês: quais lotes vão para a casa de quem assina. */
 export const edicao = { nome: "Outubro de 2026", lotes: ["bv-2026-amarelo", "bv-2026-cereja"] };
 
-export const reais = (n: number) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+export const reais = (n: number) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
 /** Avaliações de exemplo para a página de produtores (fictícias). Somam-se às reais do banco. */
 export const avaliacoesDemo: { loteId: string; nota: number; nome: string; cidade: string; comentario: string }[] = [

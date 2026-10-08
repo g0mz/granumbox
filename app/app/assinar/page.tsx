@@ -1,11 +1,12 @@
 import { Logo } from "@/components/Logo";
 import Link from "next/link";
-import { planos } from "@/lib/data";
+import { periodos, planos } from "@/lib/data";
 import { FormAssinatura } from "./FormAssinatura";
 
-export default async function Assinar({ searchParams }: { searchParams: Promise<{ plano?: string }> }) {
-  const { plano } = await searchParams;
+export default async function Assinar({ searchParams }: { searchParams: Promise<{ plano?: string; periodo?: string }> }) {
+  const { plano, periodo } = await searchParams;
   const inicial = planos.find((p) => p.id === plano)?.id ?? "box";
+  const periodoInicial = periodos.find((p) => p.id === periodo)?.id ?? "mensal";
 
   return (
     <main className="mx-auto max-w-2xl px-4 pb-20 sm:px-6">
@@ -18,7 +19,7 @@ export default async function Assinar({ searchParams }: { searchParams: Promise<
       <p className="mt-3 text-lg text-tinta-2">
         A primeira caixa sai em novembro. Garanta sua vaga agora; a cobrança só começa no envio.
       </p>
-      <FormAssinatura inicial={inicial} />
+      <FormAssinatura inicial={inicial} periodoInicial={periodoInicial} />
     </main>
   );
 }

@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import QRCode from "qrcode";
-import { avaliacoesDemo, edicao, planos, produtor, reais, sca } from "@/lib/data";
+import { avaliacoesDemo, edicao, produtor, sca } from "@/lib/data";
 import { urlDoLote } from "@/lib/origem";
 import { listarAvaliacoes } from "@/lib/store";
 import { Logo } from "@/components/Logo";
 import { Nota } from "@/components/Nota";
 import { DemoProva } from "@/components/DemoProva";
 import { CafesPrateleira } from "@/components/CafesPrateleira";
+import { PlanosVitrine } from "@/components/PlanosVitrine";
 
 export const dynamic = "force-dynamic";
 
@@ -290,40 +291,9 @@ export default async function Home() {
         <div className="mx-auto max-w-6xl px-4 py-24 text-center sm:px-6">
           <h2 className="text-5xl font-extrabold tracking-[-0.035em]">Escolha sua caixa</h2>
           <p className="mx-auto mt-4 max-w-[52ch] text-sm leading-relaxed text-creme-fixo/75">
-            Todos os cafés vêm do Norte Pioneiro do Paraná. Frete incluso, pause ou cancele quando quiser. A primeira caixa sai em novembro.
+            Todos os cafés vêm do Norte Pioneiro do Paraná. Frete incluso. Quanto mais longo o plano, menor o preço por mês. A primeira caixa sai em novembro.
           </p>
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
-            {planos.map((p) => (
-              <div key={p.id} className={`flex flex-col items-center bg-creme-fixo px-6 pb-8 pt-6 text-[#3a1a07] ${"destaque" in p ? "ring-4 ring-marca-no-escuro" : ""}`}>
-                <div className="relative flex h-44 w-full items-end justify-center" aria-hidden>
-                  {Array.from({ length: p.pacotes }).map((_, i) => (
-                    <Image
-                      key={i}
-                      src="/produto/pacote.webp"
-                      alt=""
-                      width={1122}
-                      height={1402}
-                      sizes="120px"
-                      className="-mx-3 h-auto w-24 drop-shadow-[0_12px_12px_rgb(31_18_9/0.3)] first:ml-0 last:mr-0"
-                      style={{ transform: `rotate(${(i - (p.pacotes - 1) / 2) * 6}deg)`, zIndex: i }}
-                    />
-                  ))}
-                </div>
-                <p className="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-[#6e4a33]">
-                  {p.pacotes} {p.pacotes === 1 ? "pacote" : "pacotes"} de 250 g
-                </p>
-                <h3 className="mt-5 text-xl font-bold">{p.nome}</h3>
-                <p className="mt-1 text-sm text-[#6e4a33]">{p.descricao}</p>
-                <p className="mt-4 text-3xl font-extrabold tracking-tight">
-                  {reais(p.preco)}
-                  <span className="text-sm font-medium text-[#6e4a33]">/mês</span>
-                </p>
-                <Link href={`/assinar?plano=${p.id}`} className={`${botao} mt-5 bg-[#773811] py-2.5 text-white hover:bg-[#5a290b]`}>
-                  Assinar {p.nome}
-                </Link>
-              </div>
-            ))}
-          </div>
+          <PlanosVitrine />
         </div>
       </section>
 

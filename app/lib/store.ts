@@ -79,7 +79,7 @@ export async function contarObrigados(loteId?: string): Promise<number> {
 
 /* Assinaturas (lista de espera do MVP: sem cobrança) */
 
-export type Assinatura = { id: string; plano: string; nome: string; email: string; cep: string; criadaEm: string };
+export type Assinatura = { id: string; plano: string; periodo?: string; nome: string; email: string; cep: string; criadaEm: string };
 
 const g2 = globalThis as unknown as { __assinaturas?: Assinatura[] };
 const assinaturasMem = (g2.__assinaturas ??= []);
