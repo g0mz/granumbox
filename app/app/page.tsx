@@ -57,14 +57,6 @@ export default async function Home() {
         </nav>
 
         <div className="relative mx-auto max-w-6xl px-4 pb-16 sm:px-6 md:pb-60">
-          {/* Grãos caindo pela coluna da esquerda até o botão, como o café despejado da referência */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-2 top-0 hidden h-56 w-48 overflow-hidden [mask-image:linear-gradient(to_bottom,black_60%,transparent)] md:block lg:w-44"
-          >
-            <Image src="/recortes/graos-espalhados.png" alt="" width={433} height={700} priority className="h-auto w-full -scale-x-100" />
-          </div>
-
           <div className="grid gap-8 md:grid-cols-[13rem_1fr] lg:grid-cols-[15rem_1fr]">
             <div className="order-2 flex items-end md:order-1 md:pt-56">
               <Link href="/assinar" className={`${botao} bg-marca-no-escuro text-escuro hover:bg-sobre-escuro`}>
