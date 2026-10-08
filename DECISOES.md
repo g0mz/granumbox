@@ -4,6 +4,13 @@ Registro curto do que foi decidido e por quê. Adicione no topo, com data.
 
 ## 2026-10-08
 
+**MODELO DE NEGÓCIO CORRIGIDO: clube de assinatura pago pelo consumidor (D2C).** Decisão da equipe, substitui o modelo anterior em que o produtor pagava. O GranumBox compra lotes especiais de cooperativas e associações do Norte Pioneiro, embala com a marca GranumBox (o nome é literal: a caixa do grão) e envia todo mês para o assinante, com um QR por lote contando a história de quem plantou. **Só o consumidor paga.** Produtores e cooperativas não pagam nada: vendem o café e recebem de volta a ficha de prova dos assinantes.
+- Planos (proposta, preços não validados): Grão R$ 59 (1 pacote 250 g), Box R$ 109 (2 pacotes de produtores diferentes, destaque), Família R$ 189 (4 pacotes). Frete incluso.
+- `/assinar` é lista de espera: plano, nome, e-mail e CEP; nada é cobrado. Pagamento recorrente real fica fora do MVP.
+- `/painel` virou "Curadoria", uso interno da equipe: lotes comprados, etiquetas, assinantes, avaliações.
+- A etiqueta ganhou "Selecionado e embalado por granumbox".
+- Entradas abaixo que falam em "assinatura paga pelo produtor" e "plano Cooperativa" estão superadas por esta.
+
 **Lição da Farmer Connect: o app de consumidor virou conformidade B2B.** Em 08/10/2026, farmerconnect.com redireciona para a Agridence, que vende rastreabilidade para cumprir o EUDR (lei europeia antidesmatamento; vale para grandes operadores a partir de 30/12/2026 e para pequenos em 30/06/2027). Isso reforça que a receita está no B2B (produtor e cooperativa pagam) e sugere um argumento de pitch: os dados de lote do GranumBox (talhão, coordenadas, safra) são a base do que o EUDR exige de quem exporta café para a Europa. Não implementado no MVP; fica como evolução do plano Cooperativa.
 
 **Turbopack no desenvolvimento.** `npm run dev` usa `next dev --turbopack` (Next 15.5); o build de produção continua com o compilador padrão. Testado: fontes e tokens carregam normalmente.

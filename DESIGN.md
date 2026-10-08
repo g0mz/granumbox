@@ -31,7 +31,7 @@ Derivada das duas partes do logo.
 
 | Papel | Fonte | Uso |
 |---|---|---|
-| Assinatura | **Courgette** (o "granum" do logo) | Nome da fazenda na etiqueta, título do painel. No máximo **um** uso por tela. Nunca em parágrafo, botão ou rótulo. |
+| Assinatura | **Courgette** (o "granum" do logo) | Nome da fazenda na etiqueta, título do painel. No máximo **um** uso por tela, fora a assinatura "granumbox" no rodapé da etiqueta, que reproduz o logo. Nunca em parágrafo, botão ou rótulo. |
 | Interface | **Poppins** (o "box" do logo) | Títulos (600/700), texto (400), botões (500/600) |
 | Dados de rastreio | **IBM Plex Mono** | Código do lote, datas, números de nota. Só dados, nunca frases. |
 

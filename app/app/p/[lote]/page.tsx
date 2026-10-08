@@ -41,7 +41,7 @@ export default async function PaginaLote({
             <span aria-hidden className="mt-1.5 size-2.5 shrink-0 rounded-full bg-sobre-marca" />
             <span>
               <span className="font-semibold">Pacote original verificado.</span> Este QR corresponde ao lote{" "}
-              <span className="font-mono">{lote.marcacao}</span> cadastrado pela {produtor.nome}.
+              <span className="font-mono">{lote.marcacao}</span> selecionado pelo GranumBox no {produtor.fazenda}.
             </span>
           </p>
         ) : c ? (
@@ -62,7 +62,7 @@ export default async function PaginaLote({
             {lote.variedade} do {lote.talhao}
           </h1>
           <p className="mt-1 text-tinta-2">
-            {produtor.fazenda}, {produtor.cidade} ({produtor.uf})
+            {produtor.fazenda}, {produtor.cidade} ({produtor.uf}). Comprado da {produtor.parceiro}.
           </p>
           <ul className="mt-5 flex flex-wrap gap-2">
             {lote.notasSensoriais.map((n) => (

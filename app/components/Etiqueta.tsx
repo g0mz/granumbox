@@ -44,6 +44,9 @@ export async function Etiqueta({ lote, qrUrl, giro = -1.5 }: { lote: Lote; qrUrl
           <div className="size-24 shrink-0 sm:size-28" role="img" aria-label="QR code do lote" dangerouslySetInnerHTML={{ __html: qr }} />
         )}
       </div>
+      <p className="mt-4 border-t border-dashed border-[#773811]/40 pt-3 text-[11px] text-[#6e4a33]">
+        Selecionado e embalado por <span className="font-display text-sm text-[#773811]">granum</span><span className="font-bold text-[#773811]">box</span>
+      </p>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import Link from "next/link";
 import QRCode from "qrcode";
 import { produtor, sca } from "@/lib/data";
 import { urlDoLote } from "@/lib/origem";
-import { contarObrigados, listarAvaliacoes, listarLotes, resumo } from "@/lib/store";
+import { contarObrigados, listarAssinaturas, listarAvaliacoes, listarLotes, resumo } from "@/lib/store";
 import { FichaProva } from "@/components/FichaProva";
 import { Nota } from "@/components/Nota";
 
@@ -13,6 +13,7 @@ export default async function Painel() {
   const todas = await listarAvaliacoes();
   const geral = resumo(todas);
   const obrigados = await contarObrigados();
+  const assinantes = (await listarAssinaturas()).length;
 
   const lotes = await Promise.all(
     (await listarLotes()).map(async (l) => {
@@ -41,18 +42,18 @@ export default async function Painel() {
 
       <header className="mt-8 flex flex-wrap items-end justify-between gap-6">
         <div>
-          <h1 className="font-display text-5xl text-marca leading-none sm:text-6xl">{produtor.fazenda}</h1>
+          <h1 className="font-display text-5xl text-marca leading-none sm:text-6xl">Curadoria</h1>
           <p className="mt-2 text-tinta-2">
-            {produtor.nome}, {produtor.cidade} ({produtor.uf})
+            Lotes comprados da {produtor.parceiro}. Avaliações dos assinantes vão para os produtores.
           </p>
         </div>
         <dl className="grid w-full grid-cols-2 gap-px overflow-hidden rounded-2xl bg-linha sm:grid-cols-4 md:w-auto">
           {[
             ["Nota média", geral.total ? geral.media.toFixed(1).replace(".", ",") : "-"],
             ["Avaliações", String(geral.total)],
+            ["Assinantes", String(assinantes)],
             ["Agradecimentos", String(obrigados)],
-            ["Lotes ativos", String(lotes.length)],
-          ].map(([k, v]) => (
+                      ].map(([k, v]) => (
             <div key={k} className="bg-caixa px-5 py-4">
               <dt className="text-xs text-tinta-2">{k}</dt>
               <dd className="mt-1 font-mono text-3xl">{v}</dd>

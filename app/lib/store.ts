@@ -76,3 +76,19 @@ export async function contarObrigados(loteId?: string): Promise<number> {
   if (loteId) return Number(todos[loteId] ?? 0);
   return Object.values(todos).reduce((s, v) => s + Number(v), 0);
 }
+
+/* Assinaturas (lista de espera do MVP: sem cobrança) */
+
+export type Assinatura = { id: string; plano: string; nome: string; email: string; cep: string; criadaEm: string };
+
+const g2 = globalThis as unknown as { __assinaturas?: Assinatura[] };
+const assinaturasMem = (g2.__assinaturas ??= []);
+
+export async function salvarAssinatura(a: Assinatura) {
+  if (redis) await redis.lpush("assinaturas", a);
+  else assinaturasMem.unshift(a);
+}
+
+export async function listarAssinaturas(): Promise<Assinatura[]> {
+  return redis ? ((await redis.lrange<Assinatura>("assinaturas", 0, -1)) ?? []) : assinaturasMem;
+}

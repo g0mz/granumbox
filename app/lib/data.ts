@@ -1,4 +1,4 @@
-// Dados de demonstração. Trocar pelo produtor real antes do pitch.
+// Dados de demonstração. Produtor e associação fictícios; trocar pelos parceiros reais.
 
 export const ATRIBUTOS = [
   { chave: "docura", nome: "Doçura", min: "pouca", max: "muita" },
@@ -35,6 +35,7 @@ export type Produtor = {
   desde: number;
   coordenadas: [number, number];
   origem: string;
+  parceiro: string; // cooperativa ou associação de quem o GranumBox compra
   historia: string[];
   praticas: string[];
   lotes: Lote[];
@@ -49,6 +50,7 @@ export const produtor: Produtor = {
   desde: 1978,
   coordenadas: [-23.7906, -50.0558],
   origem: "Norte Pioneiro do Paraná",
+  parceiro: "Associação de produtores do Norte Pioneiro",
   historia: [
     "Seu Antônio Moreira plantou os primeiros pés em 1978, três anos depois da geada que acabou com o café do Norte Pioneiro. Hoje os netos cuidam dos talhões.",
     "A colheita é seletiva: só o fruto cereja vai para o terreiro suspenso. Cada lote é separado por talhão e por dia de colheita, por isso cada pacote tem o seu próprio código.",
@@ -90,3 +92,17 @@ export const produtor: Produtor = {
 
 
 export const sca = (n: number) => n.toLocaleString("pt-BR", { minimumFractionDigits: 1 });
+
+/* Assinatura: quem paga é o consumidor. Preços são proposta para o pitch. */
+export const planos = [
+  { id: "grao", nome: "Grão", preco: 59, pacotes: 1, descricao: "Um pacote de 250 g por mês, de um produtor diferente a cada edição." },
+  { id: "box", nome: "Box", preco: 109, pacotes: 2, destaque: true, descricao: "Dois pacotes de 250 g de produtores diferentes, para comparar na xícara." },
+  { id: "familia", nome: "Família", preco: 189, pacotes: 4, descricao: "Quatro pacotes de 250 g por mês, para quem toma café todo dia em casa." },
+] as const;
+
+export type PlanoId = (typeof planos)[number]["id"];
+
+/** A caixa do mês: quais lotes vão para a casa de quem assina. */
+export const edicao = { nome: "Outubro de 2026", lotes: ["bv-2026-amarelo", "bv-2026-cereja"] };
+
+export const reais = (n: number) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
