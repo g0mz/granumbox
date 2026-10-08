@@ -4,6 +4,8 @@ Registro curto do que foi decidido e por quê. Adicione no topo, com data.
 
 ## 2026-10-08
 
+**Turbopack no desenvolvimento.** `npm run dev` usa `next dev --turbopack` (Next 15.5); o build de produção continua com o compilador padrão. Testado: fontes e tokens carregam normalmente.
+
 **Comparação com referências de mercado (visual e produto).**
 
 | Referência | O que fazem bem | O que o GranumBox adotou | Onde o GranumBox vai além |
@@ -15,7 +17,7 @@ Registro curto do que foi decidido e por quê. Adicione no topo, com data.
 | shadcn/ui dashboard-01 | Faixa de indicadores no topo, lista abaixo | Faixa de 4 indicadores no painel | Ficha de prova visual por lote no lugar de gráfico genérico |
 | 21st.dev / guias de rating acessível | Rating com teclado, alvos de 44px, valor escrito | Escala 1 a 5 como radiogroup, 44px, "4 de 5" | Círculos da marca no lugar de estrelas, iguais em todo o produto |
 
-A comparação acima é de padrões de produto, não de telas: o visual das referências não foi inspecionado. O GranumBox se diferencia pela identidade do próprio logo: a caixa de papelão vira superfície, a etiqueta colada vira assinatura, e o marrom é a única cor de ação.
+Visual inspecionado do Algrano (home): verde-petróleo com laranja nos botões, títulos misturando serifa e sans, e um mosaico de fotos reais de produtores logo no topo. Thank My Farmer e Origem Controlada não foram abertos (site fora do ar ou bloqueado no navegador). A lição principal é que **fotos reais da família produtora fazem falta no GranumBox**; é a melhoria de maior impacto se a equipe conseguir as fotos. O GranumBox se diferencia pela identidade do próprio logo: a caixa de papelão vira superfície, a etiqueta colada vira assinatura, e o marrom é a única cor de ação.
 
 **Referências de componentes (21st.dev, shadcn/ui blocks, guias de acessibilidade de rating).** A escala de nota virou `radiogroup` com `role="radio"`, alvos de 44px e o valor escrito ao lado ("4 de 5"); a nota exibida é um único `role="img"` com rótulo, como recomenda a documentação de acessibilidade do eBay Evo. Do dashboard-01 do shadcn veio a faixa de indicadores no topo do painel (nota média, avaliações, agradecimentos, lotes).
 
