@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import QRCode from "qrcode";
-import { edicao, planos, produtor, reais, sca } from "@/lib/data";
+import { avaliacoesDemo, edicao, planos, produtor, reais, sca } from "@/lib/data";
 import { urlDoLote } from "@/lib/origem";
 import { listarAvaliacoes } from "@/lib/store";
 import { Logo } from "@/components/Logo";
@@ -80,7 +80,9 @@ export default async function Home() {
   const url = await urlDoLote(destaque);
   const qr = await QRCode.toString(url, { type: "svg", margin: 0, color: { dark: "#3a1a07", light: "#0000" } });
   const doMes = produtor.lotes.filter((l) => edicao.lotes.includes(l.id));
-  const avaliacoes = (await listarAvaliacoes()).filter((a) => a.comentario).slice(0, 4);
+  // Uma avaliação de exemplo (fictícia, para a demo) entra depois das reais.
+  const exemplo = { ...avaliacoesDemo[0], id: "demo-0" };
+  const avaliacoes = [...(await listarAvaliacoes()).filter((a) => a.comentario), exemplo].slice(0, 4);
 
   return (
     <main className="overflow-x-clip">
@@ -374,7 +376,7 @@ export default async function Home() {
                 >
                   <span className="uppercase tracking-[0.12em]">{primeiro ? "Nov · 2026" : `Lote ${doMes[i % doMes.length]?.marcacao ?? ""}`}</span>
                   {primeiro ? (
-                    <span className="font-display text-2xl leading-tight">a sua pode ser a primeira</span>
+                    <span className="font-display text-2xl leading-tight">{i === 0 ? "a sua pode ser a primeira" : "a próxima pode ser a sua"}</span>
                   ) : (
                     <span>{i === 3 ? "Só quem escaneou um pacote avalia. Nenhuma nota é apagada." : "Aguardando a caixa de novembro."}</span>
                   )}
