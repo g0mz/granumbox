@@ -55,10 +55,14 @@ Sombra só na etiqueta (é o único objeto "colado"), sempre tingida de marrom. 
 
 ## Movimento
 
-- Só duas animações existem: `colar` (etiqueta, no carregamento) e `apertar` (escala 0,97 ao tocar em botões).
+- Só três animações existem: `colar` (etiqueta, no carregamento), `apertar` (escala 0,97 ao tocar em botões) e `chegar` (nova avaliação entrando no telão de `/apresentar`).
 - Curva `--ease-out` (`cubic-bezier(0.23, 1, 0.32, 1)`), até 300 ms.
 - Tudo desliga em `prefers-reduced-motion`.
 - Nada de animação em scroll, marquee ou loop infinito.
+
+## Impressão
+
+- `/painel/etiqueta/[lote]` imprime 4 etiquetas por A4. Use `sem-impressao` para esconder controles; no papel a etiqueta perde sombra e ganha borda tracejada de recorte.
 
 ## Texto
 

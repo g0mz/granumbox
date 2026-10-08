@@ -78,3 +78,33 @@ body {
     transform: none;
   }
 }
+
+@media print {
+  body {
+    background: white;
+  }
+  .sem-impressao {
+    display: none !important;
+  }
+  .colar {
+    animation: none;
+    box-shadow: none;
+    border: 1px dashed #773811;
+  }
+}
+
+/* Nova avaliação no telão: entra de cima, sinalizando que acabou de chegar. */
+.aovivo-item {
+  animation: chegar 320ms var(--ease-out) both;
+}
+@keyframes chegar {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aovivo-item {
+    animation: none;
+  }
+}

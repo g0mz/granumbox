@@ -9,7 +9,7 @@ export async function Etiqueta({ lote, qrUrl, giro = -1.5 }: { lote: Lote; qrUrl
 
   return (
     <div
-      className="colar relative rounded-2xl bg-white p-5 text-[#3a1a07] shadow-[0_1px_0_rgb(119_56_17/0.12),0_20px_40px_-20px_rgb(119_56_17/0.5)] sm:p-7"
+      className="colar @container relative rounded-2xl bg-white p-5 text-[#3a1a07] shadow-[0_1px_0_rgb(119_56_17/0.12),0_20px_40px_-20px_rgb(119_56_17/0.5)] sm:p-7"
       style={{ ["--giro" as string]: `${giro}deg`, transform: `rotate(${giro}deg)` }}
     >
       <div className="flex items-start justify-between gap-4 border-b border-dashed border-[#773811]/40 pb-4">
@@ -17,7 +17,7 @@ export async function Etiqueta({ lote, qrUrl, giro = -1.5 }: { lote: Lote; qrUrl
           <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#6e4a33]">
             {produtor.cidade}, {produtor.uf}
           </p>
-          <p className="mt-1 font-display text-4xl leading-tight text-[#773811] sm:text-5xl">{produtor.fazenda}</p>
+          <p className="mt-1 font-display text-[clamp(1.75rem,7cqi,3rem)] leading-[1.1] text-[#773811]">{produtor.fazenda}</p>
         </div>
         {lote.pontuacaoSCA && (
           <div className="shrink-0 rounded-xl bg-[#773811] px-3 py-2 text-center text-white">

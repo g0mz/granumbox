@@ -33,6 +33,8 @@ export type Produtor = {
   cidade: string;
   uf: string;
   desde: number;
+  coordenadas: [number, number];
+  origem: string;
   historia: string[];
   praticas: string[];
   lotes: Lote[];
@@ -45,6 +47,8 @@ export const produtor: Produtor = {
   cidade: "Pinhalão",
   uf: "PR",
   desde: 1978,
+  coordenadas: [-23.7906, -50.0558],
+  origem: "Norte Pioneiro do Paraná",
   historia: [
     "Seu Antônio Moreira plantou os primeiros pés em 1978, três anos depois da geada que acabou com o café do Norte Pioneiro. Hoje os netos cuidam dos talhões.",
     "A colheita é seletiva: só o fruto cereja vai para o terreiro suspenso. Cada lote é separado por talhão e por dia de colheita, por isso cada pacote tem o seu próprio código.",
@@ -84,8 +88,5 @@ export const produtor: Produtor = {
   ],
 };
 
-export function acharLote(id: string) {
-  return produtor.lotes.find((l) => l.id === id);
-}
 
 export const sca = (n: number) => n.toLocaleString("pt-BR", { minimumFractionDigits: 1 });

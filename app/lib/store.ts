@@ -1,5 +1,5 @@
 import { Redis } from "@upstash/redis";
-import { ATRIBUTOS, type Perfil } from "./data";
+import { ATRIBUTOS, produtor, type Lote, type Perfil } from "./data";
 
 export type Avaliacao = {
   id: string;
@@ -17,11 +17,14 @@ const url = process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
 const token = process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN;
 const redis = url && token ? new Redis({ url, token }) : null;
 
-const g = globalThis as unknown as { __avaliacoes?: Avaliacao[] };
-const memoria = (g.__avaliacoes ??= []);
+type Memoria = { avaliacoes: Avaliacao[]; lotes: Lote[]; obrigados: Record<string, number> };
+const g = globalThis as unknown as { __granum?: Memoria };
+const mem = (g.__granum ??= { avaliacoes: [], lotes: [], obrigados: {} });
+
+/* Avaliações */
 
 export async function listarAvaliacoes(loteId?: string): Promise<Avaliacao[]> {
-  const todas = redis ? ((await redis.lrange<Avaliacao>("avaliacoes", 0, -1)) ?? []) : memoria;
+  const todas = redis ? ((await redis.lrange<Avaliacao>("avaliacoes", 0, -1)) ?? []) : mem.avaliacoes;
   return (loteId ? todas.filter((a) => a.loteId === loteId) : todas).sort((a, b) =>
     b.criadaEm.localeCompare(a.criadaEm),
   );
@@ -29,7 +32,7 @@ export async function listarAvaliacoes(loteId?: string): Promise<Avaliacao[]> {
 
 export async function salvarAvaliacao(a: Avaliacao) {
   if (redis) await redis.lpush("avaliacoes", a);
-  else memoria.unshift(a);
+  else mem.avaliacoes.unshift(a);
 }
 
 export function resumo(avaliacoes: Avaliacao[]) {
@@ -41,4 +44,35 @@ export function resumo(avaliacoes: Avaliacao[]) {
     if (vals.length) perfil[chave] = vals.reduce((s, v) => s + v, 0) / vals.length;
   }
   return { total, media, perfil };
+}
+
+/* Lotes: os de demonstração + os cadastrados pelo painel */
+
+export async function listarLotes(): Promise<Lote[]> {
+  const novos = redis ? ((await redis.lrange<Lote>("lotes", 0, -1)) ?? []) : mem.lotes;
+  return [...novos, ...produtor.lotes];
+}
+
+export async function acharLote(id: string) {
+  return (await listarLotes()).find((l) => l.id === id);
+}
+
+export async function salvarLote(l: Lote) {
+  if (redis) await redis.lpush("lotes", l);
+  else mem.lotes.unshift(l);
+}
+
+/* Agradecimentos ao produtor */
+
+export async function agradecer(loteId: string) {
+  if (redis) return redis.hincrby("obrigados", loteId, 1);
+  return (mem.obrigados[loteId] = (mem.obrigados[loteId] ?? 0) + 1);
+}
+
+export async function contarObrigados(loteId?: string): Promise<number> {
+  const todos: Record<string, number> = redis
+    ? ((await redis.hgetall<Record<string, number>>("obrigados")) ?? {})
+    : mem.obrigados;
+  if (loteId) return Number(todos[loteId] ?? 0);
+  return Object.values(todos).reduce((s, v) => s + Number(v), 0);
 }

@@ -99,6 +99,32 @@ export default async function Home() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-6xl px-4 pb-20 sm:px-6">
+        <div className="grid gap-10 rounded-3xl bg-marca p-8 text-white sm:p-12 md:grid-cols-[1.2fr_1fr] md:items-center">
+          <div>
+            <h2 className="text-3xl font-semibold leading-tight tracking-tight">
+              O selo de origem diz de onde o café vem. O GranumBox mostra o que acharam dele.
+            </h2>
+            <p className="mt-5 max-w-[50ch] leading-relaxed text-white/85">
+              O Norte Pioneiro ganhou Denominação de Origem em 2025, e o selo da IG já rastreia a procedência. O
+              GranumBox soma o que falta: a história da família e a opinião verificada de quem bebeu, lote por lote.
+            </p>
+          </div>
+          <ul className="space-y-4 text-white/90">
+            {[
+              ["Para o produtor", "Argumento com dados para vender melhor a próxima safra."],
+              ["Para a cooperativa", "Uma página por associado e a visão da região inteira."],
+              ["Para quem compra", "Saber quem plantou, sem baixar aplicativo."],
+            ].map(([t, d]) => (
+              <li key={t} className="border-t border-white/25 pt-4">
+                <p className="font-semibold text-white">{t}</p>
+                <p className="mt-1 text-sm leading-relaxed">{d}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       <section id="planos" className="border-t border-linha bg-caixa">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <h2 className="text-3xl font-semibold tracking-tight">Assinatura mensal para o produtor.</h2>

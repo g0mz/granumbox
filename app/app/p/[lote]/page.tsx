@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { acharLote, produtor } from "@/lib/data";
-import { listarAvaliacoes, resumo } from "@/lib/store";
+import { produtor } from "@/lib/data";
+import { acharLote, contarObrigados, listarAvaliacoes, resumo } from "@/lib/store";
+import { Agradecer } from "./Agradecer";
 import { Etiqueta } from "@/components/Etiqueta";
 import { FichaProva } from "@/components/FichaProva";
 import { Nota } from "@/components/Nota";
@@ -18,11 +19,14 @@ export default async function PaginaLote({
 }) {
   const { lote: id } = await params;
   const { c } = await searchParams;
-  const lote = acharLote(id);
+  const lote = await acharLote(id);
   if (!lote) notFound();
 
   const avaliacoes = await listarAvaliacoes(lote.id);
   const { total, media, perfil } = resumo(avaliacoes);
+  const obrigados = await contarObrigados(lote.id);
+  const [lat, lon] = produtor.coordenadas;
+  const bbox = [lon - 0.06, lat - 0.035, lon + 0.06, lat + 0.035].join(",");
 
   return (
     <main className="mx-auto max-w-xl pb-20">
@@ -75,6 +79,18 @@ export default async function PaginaLote({
             </p>
           ))}
           <p className="mt-5 text-sm text-tinta-2">{produtor.praticas.join(", ")}.</p>
+          <figure className="mt-6 overflow-hidden rounded-2xl border border-linha">
+            <iframe
+              title={`Mapa de ${produtor.cidade}, ${produtor.uf}`}
+              src={`https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lon}`}
+              className="block h-48 w-full grayscale-[35%] sepia-[25%]"
+              loading="lazy"
+            />
+            <figcaption className="bg-fundo px-4 py-2.5 text-sm text-tinta-2">
+              {produtor.cidade}, {produtor.origem}
+            </figcaption>
+          </figure>
+          <Agradecer loteId={lote.id} nome={produtor.nome} inicial={obrigados} />
         </section>
 
         <section className="bg-caixa px-5 py-7">
