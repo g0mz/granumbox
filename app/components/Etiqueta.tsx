@@ -1,5 +1,5 @@
 import QRCode from "qrcode";
-import { produtor, sca, type Lote } from "@/lib/data";
+import { produtorDoLote, sca, type Lote } from "@/lib/data";
 
 /** Etiqueta do lote, colada na caixa. Assinatura visual do GranumBox (ver DESIGN.md). */
 export async function Etiqueta({ lote, qrUrl, giro = -1.5 }: { lote: Lote; qrUrl?: string; giro?: number }) {
@@ -7,6 +7,7 @@ export async function Etiqueta({ lote, qrUrl, giro = -1.5 }: { lote: Lote; qrUrl
     ? await QRCode.toString(qrUrl, { type: "svg", margin: 0, color: { dark: "#773811", light: "#0000" } })
     : null;
 
+  const produtor = produtorDoLote(lote.id);
   return (
     <div
       className="colar @container relative rounded-2xl bg-white p-5 text-[#3a1a07] shadow-[0_1px_0_rgb(119_56_17/0.12),0_20px_40px_-20px_rgb(119_56_17/0.5)] sm:p-7"

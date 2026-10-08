@@ -1,5 +1,5 @@
 import { Redis } from "@upstash/redis";
-import { ATRIBUTOS, produtor, type Lote, type Perfil } from "./data";
+import { ATRIBUTOS, produtores, type Lote, type Perfil } from "./data";
 
 export type Avaliacao = {
   id: string;
@@ -50,7 +50,7 @@ export function resumo(avaliacoes: Avaliacao[]) {
 
 export async function listarLotes(): Promise<Lote[]> {
   const novos = redis ? ((await redis.lrange<Lote>("lotes", 0, -1)) ?? []) : mem.lotes;
-  return [...novos, ...produtor.lotes];
+  return [...novos, ...produtores.flatMap((p) => p.lotes)];
 }
 
 export async function acharLote(id: string) {

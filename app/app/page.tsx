@@ -401,8 +401,8 @@ export default async function Home() {
             <p className="mt-6 max-w-[42ch] leading-relaxed text-tinta-2">
               Todo café da GranumBox vem de famílias do Norte Pioneiro do Paraná, região com Denominação de Origem desde 2025. Você sabe a cidade, o sítio e a altitude de cada pacote.
             </p>
-            <Link href="/assinar" className={`${botao} mt-8 bg-marca text-sobre-marca hover:bg-marca-forte`}>
-              Assinar
+            <Link href="/produtores" className={`${botao} mt-8 bg-marca text-sobre-marca hover:bg-marca-forte`}>
+              Conheça os produtores
             </Link>
           </div>
           <div className="bg-fundo p-6 shadow-[0_30px_60px_-30px_rgb(0_0_0/0.7)] sm:p-8">

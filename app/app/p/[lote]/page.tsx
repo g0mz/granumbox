@@ -1,6 +1,8 @@
+import Image from "next/image";
+import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { notFound } from "next/navigation";
-import { produtor } from "@/lib/data";
+import { avaliacoesDemo, produtorDoLote, sca } from "@/lib/data";
 import { acharLote, contarObrigados, listarAvaliacoes, resumo } from "@/lib/store";
 import { Agradecer } from "./Agradecer";
 import { Etiqueta } from "@/components/Etiqueta";
@@ -9,6 +11,9 @@ import { Nota } from "@/components/Nota";
 import { FormAvaliacao } from "./FormAvaliacao";
 
 export const dynamic = "force-dynamic";
+
+// Fotos ilustrativas (licença Unsplash), as mesmas da página de produtores.
+const foto = (id: string, w: number) => `https://images.unsplash.com/photo-${id}?w=${w}&q=75&auto=format&fit=crop`;
 
 export default async function PaginaLote({
   params,
@@ -22,7 +27,14 @@ export default async function PaginaLote({
   const lote = await acharLote(id);
   if (!lote) notFound();
 
-  const avaliacoes = await listarAvaliacoes(lote.id);
+  const produtor = produtorDoLote(lote.id);
+  const outros = produtor.lotes.filter((l) => l.id !== lote.id);
+  const reais = await listarAvaliacoes(lote.id);
+  // Avaliações de exemplo (fictícias) contam na nota média; sem perfil, não mexem no gráfico.
+  const exemplos = avaliacoesDemo
+    .filter((a) => a.loteId === lote.id)
+    .map((a, i) => ({ ...a, id: `demo-${i}`, perfil: {}, criadaEm: "" }));
+  const avaliacoes = [...reais, ...exemplos];
   const { total, media, perfil } = resumo(avaliacoes);
   const obrigados = await contarObrigados(lote.id);
   const [lat, lon] = produtor.coordenadas;
@@ -86,6 +98,18 @@ export default async function PaginaLote({
         </section>
 
         <section className="bg-caixa px-5 py-7">
+          {produtor.imagem && (
+            <div className="-mx-5 -mt-7 mb-6 grid grid-cols-2 gap-1">
+              <div className="relative col-span-2 aspect-[16/10]">
+                <Image src={foto(produtor.imagem.id, 1000)} alt={produtor.imagem.alt} fill sizes="(min-width: 640px) 576px, 100vw" className="object-cover" />
+              </div>
+              {produtor.galeria?.map((g) => (
+                <div key={g.id} className="relative aspect-[4/3]">
+                  <Image src={foto(g.id, 500)} alt={g.alt} fill sizes="(min-width: 640px) 288px, 50vw" className="object-cover" />
+                </div>
+              ))}
+            </div>
+          )}
           <h2 className="text-lg font-semibold">
             {produtor.nome}, desde {produtor.desde}
           </h2>
@@ -95,6 +119,27 @@ export default async function PaginaLote({
             </p>
           ))}
           <p className="mt-5 text-sm text-tinta-2">{produtor.praticas.join(", ")}.</p>
+          {produtor.pessoas && (
+            <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+              {produtor.pessoas.map((pe) => (
+                <li key={pe.nome} className="flex items-center gap-3">
+                  <div className="relative size-16 shrink-0 overflow-hidden rounded-full">
+                    <Image src={foto(pe.foto, 200)} alt={pe.alt} fill sizes="64px" className="object-cover" />
+                  </div>
+                  <div className="text-sm leading-snug">
+                    <p className="font-semibold">{pe.nome}</p>
+                    <p className="text-tinta-2">{pe.papel}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+          {produtor.contato && (
+            <p className="mt-6 flex flex-wrap gap-x-6 gap-y-1 text-sm">
+              <a href={`tel:+55${produtor.contato.telefone.replace(/\D/g, "")}`} className="font-mono underline-offset-4 hover:underline">{produtor.contato.telefone}</a>
+              <a href={`mailto:${produtor.contato.email}`} className="break-all underline-offset-4 hover:underline">{produtor.contato.email}</a>
+            </p>
+          )}
           <figure className="mt-6 overflow-hidden rounded-2xl border border-linha">
             <iframe
               title={`Mapa de ${produtor.cidade}, ${produtor.uf}`}
@@ -144,9 +189,11 @@ export default async function PaginaLote({
                 <li key={a.id} className="py-4">
                   <div className="flex items-center justify-between">
                     <Nota valor={a.nota} />
-                    <span className="font-mono text-xs text-tinta-2">
-                      {new Date(a.criadaEm).toLocaleDateString("pt-BR")}
-                    </span>
+                    {a.criadaEm && (
+                      <span className="font-mono text-xs text-tinta-2">
+                        {new Date(a.criadaEm).toLocaleDateString("pt-BR")}
+                      </span>
+                    )}
                   </div>
                   {a.comentario && <p className="mt-2 leading-relaxed">{a.comentario}</p>}
                   {(a.nome || a.cidade) && (
@@ -157,6 +204,31 @@ export default async function PaginaLote({
             </ul>
           </section>
         )}
+
+        {outros.length > 0 && (
+          <section className="bg-caixa px-5 py-7">
+            <h2 className="text-lg font-semibold">Outros cafés do {produtor.fazenda}</h2>
+            <ul className="mt-5 grid gap-3">
+              {outros.map((l) => (
+                <li key={l.id}>
+                  <Link href={`/p/${l.id}`} className="block bg-fundo p-4 text-sm hover:ring-1 hover:ring-marca">
+                    <p className="flex justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.12em] text-marca">
+                      <span>Lote {l.marcacao}</span>
+                      {l.pontuacaoSCA && <span>SCA {sca(l.pontuacaoSCA)}</span>}
+                    </p>
+                    <p className="mt-2 text-base font-semibold">{l.variedade}, {l.processo.toLowerCase()}</p>
+                    <p className="mt-1 text-tinta-2">{l.notasSensoriais.join(" · ")}</p>
+                    <p className="mt-2 font-semibold text-marca">Ver ficha →</p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <p className="px-5 pt-6 text-center text-sm">
+          <Link href="/produtores" className="font-semibold text-marca underline-offset-4 hover:underline">Conheça todos os produtores →</Link>
+        </p>
       </div>
     </main>
   );
