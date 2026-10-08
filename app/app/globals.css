@@ -13,6 +13,8 @@
   --escuro: #1f1209; /* seções escuras (topo, planos, rodapé), iguais nos dois temas */
   --sobre-escuro: #f3e6d8;
   --marca-no-escuro: #d9925a;
+  --faixa: #3d1c08; /* faixa de planos (o verde-escuro da referência, em marrom) */
+  --creme-fixo: #f4ece3; /* cartões claros sobre faixas escuras, nos dois temas */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -41,6 +43,8 @@
   --color-escuro: var(--escuro);
   --color-sobre-escuro: var(--sobre-escuro);
   --color-marca-no-escuro: var(--marca-no-escuro);
+  --color-faixa: var(--faixa);
+  --color-creme-fixo: var(--creme-fixo);
   --font-sans: var(--font-montserrat);
   --font-display: var(--font-playfair);
   --font-mono: var(--font-plex-mono);

@@ -70,6 +70,13 @@ Sombra só na etiqueta (é o único objeto "colado"), sempre tingida de marrom. 
 - Nunca usar foto de banco como se fosse um lote, uma fazenda ou um produtor específico. Cartões de lote mostram dados reais (código, pontuação SCA), não foto.
 - Prioridade: substituir por fotos reais da caixa GranumBox e das famílias parceiras assim que existirem.
 
+## Sobreposições (página inicial)
+
+- Recortes sem fundo em `app/public/recortes/` (xícara com respingo, monte de grãos, grãos espalhados), gerados de fotos Unsplash. Eles atravessam a divisa entre o topo escuro e a seção clara: xícara à direita, etiqueta do lote à esquerda com o botão redondo de sacola por cima, monte de grãos entre os dois.
+- Camadas: grãos `z-10`, xícara e textos `z-20`, etiqueta `z-30`. Texto nunca pode cair sobre a divisa: fica inteiro no escuro ou inteiro no claro.
+- Seções claras levam grãos desfocados como marca-d'água (`opacity 13%`, `blur 6px`).
+- Na página inicial os botões são retangulares (`rounded-[4px]`), como na referência; nas telas internas continuam arredondados.
+
 ## Página inicial
 
 Estrutura inspirada num layout de cafeteria enviado pela equipe: topo escuro com manchete gigante (Montserrat ExtraBold) e foto, seção clara de cafés com abas por processo, seção dividida com duas fotos, ficha de prova, faixa escura de planos como vitrine, depoimentos só com avaliações reais e rodapé escuro em colunas.
