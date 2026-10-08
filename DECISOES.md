@@ -4,6 +4,18 @@ Registro curto do que foi decidido e por quê. Adicione no topo, com data.
 
 ## 2026-10-08
 
+**A página inicial é só para o cliente** (correção da equipe). Saiu a seção "Para cooperativas" e o link "Curadoria" do menu (continua no rodapé, em "Equipe", para a demo). No lugar: "Um só lugar: o Norte Pioneiro.", com o muro de cidades ao fundo e a ficha de origem do lote (sítio, cidade, talhão, altitude, variedade, SCA). A conversa com cooperativas fica fora do site do consumidor.
+
+**"Quem já provou" virou mural e "Cooperativas" virou muro de cidades + tabela** (escolhas da equipe). Mural: 4 cartões; avaliações reais ocupam os primeiros, o resto fica pontilhado ("a sua pode ser a primeira"), nunca depoimento inventado. Cooperativas: nomes de municípios do Norte Pioneiro ao fundo (Pinhalão, onde já há parceiro, em destaque) e por cima a tabela "Vocês entregam × Vocês recebem". A lista de municípios ainda precisa ser conferida pela equipe.
+
+**"Você prova" virou demonstração interativa** (escolha da equipe: celular + ficha em papel). O visitante arrasta as notas num celular e escreve um recado; ao enviar, vira a ficha de prova em papel com as notas circuladas e "segue pela cooperativa até Pinhalão". Nada é gravado e a ficha diz isso. Sem fonte manuscrita: o recado usa Montserrat itálico para não sair do design system. Componente `DemoProva`.
+
+**"Da lavoura à sua porta. E de volta." virou ciclo** (escolha da equipe: rota em círculo + objetos). Círculo pontilhado com setas no sentido horário e os objetos de cada etapa nos pontos (lavoura, pacote, caixa, cartão com QR), numerados; o texto das 4 etapas fica no miolo. Mostra o diferencial: a nota volta ao sítio. No celular vira lista com os objetos.
+
+**"Os cafés desta caixa" virou prateleira** (escolha da equipe entre 3 amostras: mistura de prateleira + etiqueta pendurada). Pacote PNG real com o rótulo trocado pelo do lote (sítio, cidade, altitude, processo), etiqueta de papel em mono pendurada na borda com lote, SCA e notas. Saem as fotos de banco e as abas por processo (só 2 cafés, filtro não ajudava). Componente `CafesPrateleira`.
+
+**Embalagem real na página inicial** (pedido da equipe). Os PNGs da caixa preta, do pacote kraft e do cartão do lote (`app/public/produto/`) entram numa seção nova, "Abra a caixa. Conheça o sítio.", com legendas curtas por item; ela substitui a seção "Uma manhã diferente" (foto de banco). Nos planos, o monte de grãos virou a quantidade real de pacotes (1, 2, 4). Segue o que Moka Clube e Atlas fazem: a embalagem fotografada é o elemento principal. Todo texto reforça que os cafés são só do Norte Pioneiro do Paraná.
+
 **Recortes sempre em PNG de boa qualidade** (pedido da equipe). `scripts/recortar.py` gera os PNGs a partir das fotos Unsplash. Removido o botão redondo de sacola do topo e o ícone de sacola do menu; xícara deslocada para a direita.
 
 **Página inicial refeita com sobreposições, copiando o estilo da referência** a pedido da equipe ("copie EXATAMENTE o estilo"): recortes sem fundo invadindo a divisa, etiqueta com botão redondo por cima, filete de grãos até o botão, cartões com foto quadrada, faixa de planos com cartões claros, botões retangulares. Cores e fontes continuam as do GranumBox.
