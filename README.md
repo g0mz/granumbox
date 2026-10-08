@@ -1,1 +1,1 @@
-# hackathon-geniuscon2026
+# GranumBox
