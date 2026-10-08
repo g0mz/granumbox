@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import QRCode from "qrcode";
-import { Handbag } from "@phosphor-icons/react/dist/ssr";
 import { edicao, planos, produtor, reais, sca } from "@/lib/data";
 import { urlDoLote } from "@/lib/origem";
 import { listarAvaliacoes } from "@/lib/store";
@@ -21,7 +20,7 @@ const botao = "apertar inline-flex items-center justify-center gap-2 rounded-[4p
 function GraosFundo({ className }: { className: string }) {
   return (
     <div aria-hidden className={`pointer-events-none absolute opacity-[0.13] blur-[6px] ${className}`}>
-      <Image src="/recortes/graos-espalhados.webp" alt="" width={676} height={784} className="h-auto w-full" />
+      <Image src="/recortes/graos-espalhados.png" alt="" width={433} height={700} className="h-auto w-full" />
     </div>
   );
 }
@@ -51,8 +50,8 @@ export default async function Home() {
           </div>
           <div className="flex items-center gap-6 text-sm">
             <Link href="/painel" className="hidden hover:text-marca-no-escuro sm:inline">Curadoria</Link>
-            <Link href="/assinar" className="flex items-center gap-2 font-semibold hover:text-marca-no-escuro">
-              Assinar <Handbag size={20} weight="bold" aria-hidden />
+            <Link href="/assinar" className={`${botao} bg-marca-no-escuro px-5 py-2.5 text-escuro hover:bg-sobre-escuro`}>
+              Assinar
             </Link>
           </div>
         </nav>
@@ -63,7 +62,7 @@ export default async function Home() {
             aria-hidden
             className="pointer-events-none absolute left-2 top-0 hidden h-56 w-48 overflow-hidden [mask-image:linear-gradient(to_bottom,black_60%,transparent)] md:block lg:w-44"
           >
-            <Image src="/recortes/graos-espalhados.webp" alt="" width={676} height={784} priority className="h-auto w-full -scale-x-100" />
+            <Image src="/recortes/graos-espalhados.png" alt="" width={433} height={700} priority className="h-auto w-full -scale-x-100" />
           </div>
 
           <div className="grid gap-8 md:grid-cols-[13rem_1fr] lg:grid-cols-[15rem_1fr]">
@@ -73,7 +72,7 @@ export default async function Home() {
               </Link>
             </div>
             <div className="order-1 md:order-2 md:pt-6">
-              <h1 className="text-[3.4rem] font-extrabold leading-[0.95] tracking-[-0.04em] sm:text-7xl lg:text-[6.2rem]">
+              <h1 className="text-[3.4rem] font-extrabold leading-[0.95] tracking-[-0.04em] sm:text-7xl lg:text-[5.4rem] xl:text-[6.2rem]">
                 Café com nome <br className="hidden md:inline" />e sobrenome.
               </h1>
               <p className="mt-8 max-w-[44ch] leading-relaxed text-sobre-escuro/80">
@@ -83,7 +82,7 @@ export default async function Home() {
           </div>
 
           {/* Destaque da caixa: fica inteiro na área escura, à direita da etiqueta */}
-          <div className="relative z-20 mt-12 max-w-xs md:absolute md:bottom-14 md:left-[19rem] md:mt-0">
+          <div className="relative z-20 mt-12 max-w-xs md:absolute md:bottom-16 md:left-[calc(13rem+2rem+1.5rem)] md:mt-0 lg:left-[calc(15rem+2rem+1.5rem)]">
             <span className="inline-block rounded-full border border-sobre-escuro/40 px-3 py-1 text-xs">Na caixa de outubro</span>
             <p className="mt-4 text-2xl font-bold">
               {destaque.variedade}, {destaque.processo.toLowerCase()}
@@ -95,8 +94,8 @@ export default async function Home() {
           </div>
 
           {/* Monte de grãos atravessando a divisa, atrás da etiqueta */}
-          <div aria-hidden className="pointer-events-none absolute -bottom-14 left-[12rem] z-10 hidden w-[27rem] md:block">
-            <Image src="/recortes/graos-monte.webp" alt="" width={1200} height={266} className="h-auto w-full drop-shadow-[0_12px_14px_rgb(0_0_0/0.35)]" />
+          <div aria-hidden className="pointer-events-none absolute -bottom-12 left-[11rem] z-10 hidden w-[30rem] md:block">
+            <Image src="/recortes/graos-monte.png" alt="" width={1000} height={174} className="h-auto w-full drop-shadow-[0_12px_14px_rgb(0_0_0/0.35)]" />
           </div>
 
           {/* Etiqueta do lote atravessando a divisa, com o botão redondo por cima */}
@@ -123,22 +122,15 @@ export default async function Home() {
                 <span className="font-extrabold text-[#773811]">box</span>
               </p>
             </Link>
-            <Link
-              href="/assinar"
-              aria-label="Assinar"
-              className="apertar absolute -right-11 top-[38%] grid size-20 place-items-center rounded-full border-4 border-marca-no-escuro bg-escuro/55 text-sobre-escuro backdrop-blur-md hover:bg-escuro/75"
-            >
-              <Handbag size={34} weight="fill" aria-hidden />
-            </Link>
           </div>
 
           {/* Xícara recortada que invade a seção seguinte */}
-          <div className="pointer-events-none relative z-20 mx-auto -mb-40 mt-6 w-full max-w-md md:mb-0 md:absolute md:-bottom-36 md:-right-6 md:mt-0 md:w-[52%] md:max-w-none">
+          <div className="pointer-events-none relative z-20 mx-auto -mb-40 mt-6 w-full max-w-md md:mb-0 md:absolute md:-bottom-32 md:-right-8 md:mt-0 md:w-[48%] md:max-w-none lg:-right-16 xl:-right-36 2xl:-right-48">
             <Image
-              src="/recortes/xicara-respingo.webp"
+              src="/recortes/xicara-respingo.png"
               alt="Xícara de café com respingo"
-              width={1200}
-              height={835}
+              width={1100}
+              height={766}
               priority
               sizes="(min-width: 768px) 52vw, 90vw"
               className="h-auto w-full drop-shadow-[0_30px_40px_rgb(0_0_0/0.45)]"
@@ -192,7 +184,7 @@ export default async function Home() {
             </Link>
           </div>
           <div className="relative">
-            <Image src="/recortes/graos-espalhados.webp" alt="" width={676} height={784} className="mx-auto h-auto w-3/4 drop-shadow-[0_18px_20px_rgb(58_26_7/0.3)]" aria-hidden />
+            <Image src="/recortes/graos-espalhados.png" alt="" width={433} height={700} className="mx-auto h-auto w-3/4 drop-shadow-[0_18px_20px_rgb(58_26_7/0.3)]" aria-hidden />
             <p className="mt-4 max-w-[30ch] text-sm leading-relaxed text-tinta-2">
               Lotes diferentes a cada edição, sempre do Norte Pioneiro, sempre com a história de quem plantou.
             </p>
@@ -241,7 +233,7 @@ export default async function Home() {
             {planos.map((p) => (
               <div key={p.id} className={`flex flex-col items-center bg-creme-fixo px-6 pb-8 pt-6 text-[#3a1a07] ${"destaque" in p ? "ring-4 ring-marca-no-escuro" : ""}`}>
                 <div className="relative h-40 w-full">
-                  <Image src="/recortes/graos-monte.webp" alt="" width={1200} height={266} className="absolute bottom-0 h-auto w-full" aria-hidden />
+                  <Image src="/recortes/graos-monte.png" alt="" width={1000} height={174} className="absolute bottom-0 h-auto w-full" aria-hidden />
                   <p className="relative pt-4 font-display text-6xl text-[#773811]">
                     {p.pacotes}
                     <span className="ml-2 font-sans text-sm font-semibold not-italic text-[#6e4a33]">{p.pacotes === 1 ? "pacote" : "pacotes"}</span>

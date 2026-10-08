@@ -4,6 +4,8 @@ Registro curto do que foi decidido e por quê. Adicione no topo, com data.
 
 ## 2026-10-08
 
+**Recortes sempre em PNG de boa qualidade** (pedido da equipe). `scripts/recortar.py` gera os PNGs a partir das fotos Unsplash. Removido o botão redondo de sacola do topo e o ícone de sacola do menu; xícara deslocada para a direita.
+
 **Página inicial refeita com sobreposições, copiando o estilo da referência** a pedido da equipe ("copie EXATAMENTE o estilo"): recortes sem fundo invadindo a divisa, etiqueta com botão redondo por cima, filete de grãos até o botão, cartões com foto quadrada, faixa de planos com cartões claros, botões retangulares. Cores e fontes continuam as do GranumBox.
 
 **Página inicial recriada a partir de um layout de referência da equipe** (cafeteria fictícia "Cofshop"): mantida a estrutura (topo escuro com manchete e foto, cafés com abas, seção com fotos, vitrine de planos em faixa escura, depoimentos, rodapé em colunas), trocando cores e fontes pelo design system. As fotos do layout não foram copiadas; usamos 3 fotos de clima do Unsplash, verificadas, sem associá-las a um lote. Depoimentos só aparecem com avaliações reais; sem elas, a seção explica quando chegam.
