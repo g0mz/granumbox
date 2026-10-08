@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-cafe: #773811;
+  --color-cafe-escuro: #4a220a;
+  --color-creme: #fcfaf6;
+  --color-areia: #f1e8dc;
+  --color-tinta: #2a1a10;
+  --font-sans: var(--font-sans-app);
+  --font-serif: var(--font-serif-app);
+}
+
+body {
+  background: var(--color-creme);
+  color: var(--color-tinta);
+}
