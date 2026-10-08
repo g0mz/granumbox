@@ -67,7 +67,7 @@ export default async function Home() {
           </div>
 
           {/* Destaque da caixa: fica inteiro na área escura, à direita da etiqueta */}
-          <div className="relative z-20 mt-12 max-w-xs md:absolute md:bottom-16 md:left-[18.5rem] md:mt-0">
+          <div className="relative z-20 mt-12 max-w-xs md:absolute md:bottom-16 md:left-[18.5rem] md:mt-0 lg:left-[calc(44%+18rem)] lg:max-w-[19rem]">
             <span className="inline-block rounded-full border border-sobre-escuro/40 px-3 py-1 text-xs">Na caixa de outubro</span>
             <p className="mt-4 text-2xl font-bold">
               {destaque.variedade}, {destaque.processo.toLowerCase()}
@@ -79,12 +79,12 @@ export default async function Home() {
           </div>
 
           {/* Monte de grãos atravessando a divisa, atrás da etiqueta */}
-          <div aria-hidden className="pointer-events-none absolute -bottom-12 left-[11rem] z-10 hidden w-[30rem] md:block">
+          <div aria-hidden className="pointer-events-none absolute -bottom-12 left-[11rem] z-10 hidden w-[30rem] md:block lg:left-[calc(44%+5rem)]">
             <Image src="/recortes/graos-monte.png" alt="" width={1000} height={174} className="h-auto w-full drop-shadow-[0_12px_14px_rgb(0_0_0/0.35)]" />
           </div>
 
           {/* Etiqueta do lote atravessando a divisa, com o botão redondo por cima */}
-          <div className="relative z-30 mt-10 w-56 md:absolute md:-bottom-32 md:left-6 md:mt-0">
+          <div className="relative z-30 mt-10 w-56 md:absolute md:-bottom-32 md:left-6 md:mt-0 lg:left-[44%]">
             <Link
               href={url}
               className="block -rotate-3 rounded-md bg-creme-fixo p-4 text-[#3a1a07] shadow-[0_24px_50px_-12px_rgb(0_0_0/0.6)] transition-transform hover:-rotate-1"
