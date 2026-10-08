@@ -4,6 +4,14 @@ Registro curto do que foi decidido e por quê. Adicione no topo, com data.
 
 ## 2026-10-08
 
+**Referências visuais do modelo de assinatura (inspecionadas no navegador em 08/10/2026).**
+- **Moka Clube** (primeiro clube de café especial do Brasil, 2012): marca amarela forte, foto real da embalagem como herói, grade de produtos com nome, notas sensoriais e preço, cupom de primeira compra no topo e frete grátis acima de um valor.
+- **Atlas Coffee Club** (EUA): cada pacote tem arte própria do país de origem, foto do produto em cena, "How it works" em três passos e oferta "primeiro pacote grátis" capturando e-mail.
+- **O que o GranumBox já faz igual:** caminho em passos, planos com preço por mês, frete incluso, notas sensoriais por lote.
+- **Onde vai além:** QR por lote com a história e ficha de prova comparada, e a opinião do assinante voltando ao produtor. Nenhum dos dois mostra isso na home.
+- **O que falta e só a equipe resolve:** foto real da caixa e do pacote GranumBox. Nas duas referências, a embalagem fotografada é o elemento visual principal. Não usar foto de banco nem ilustração falsa; fotografar a caixa montada com a etiqueta impressa.
+- **Ideia para decidir:** oferta de entrada (primeira caixa com desconto) como as duas fazem. Não implementado: é decisão comercial da equipe.
+
 **MODELO DE NEGÓCIO CORRIGIDO: clube de assinatura pago pelo consumidor (D2C).** Decisão da equipe, substitui o modelo anterior em que o produtor pagava. O GranumBox compra lotes especiais de cooperativas e associações do Norte Pioneiro, embala com a marca GranumBox (o nome é literal: a caixa do grão) e envia todo mês para o assinante, com um QR por lote contando a história de quem plantou. **Só o consumidor paga.** Produtores e cooperativas não pagam nada: vendem o café e recebem de volta a ficha de prova dos assinantes.
 - Planos (proposta, preços não validados): Grão R$ 59 (1 pacote 250 g), Box R$ 109 (2 pacotes de produtores diferentes, destaque), Família R$ 189 (4 pacotes). Frete incluso.
 - `/assinar` é lista de espera: plano, nome, e-mail e CEP; nada é cobrado. Pagamento recorrente real fica fora do MVP.
