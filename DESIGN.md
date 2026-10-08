@@ -16,6 +16,7 @@ O logo é uma **caixa de papelão aberta com um grão de café**. O sistema inte
 | `tinta-2` | `#6E4A33` | `#C9AE95` | Texto secundário, legendas |
 | `marca` | `#773811` | `#D9925A` | Cor do logo. Botões, links, notas, destaques |
 | `marca-forte` | `#5A290B` | `#E8A873` | Hover e pressionado de `marca` |
+| `sobre-marca` | `#FFFFFF` | `#1C120B` | Texto e ícones sobre fundo `marca` (nunca `text-white`) |
 | `linha` | marca 18% | tinta 16% | Divisórias e bordas |
 
 Regras:
@@ -51,7 +52,7 @@ Sombra só na etiqueta (é o único objeto "colado"), sempre tingida de marrom. 
 - **Etiqueta** ([components/Etiqueta.tsx](app/components/Etiqueta.tsx)): assinatura. Levemente girada (-2° a 2°), entra com a animação `colar`.
 - **FichaProva** ([components/FichaProva.tsx](app/components/FichaProva.tsx)): escala 1 a 5 por atributo (doçura, acidez, corpo, finalização), comparando o consumidor com a ficha do produtor. É a resposta ao desafio Café com Valor e aparece na landing, no lote e no painel.
 - **Nota** ([components/Nota.tsx](app/components/Nota.tsx)): 5 círculos. Nunca estrelas.
-- **Botão primário**: `rounded-full bg-marca text-white hover:bg-marca-forte apertar`. Secundário: `rounded-full border border-marca text-marca hover:bg-marca hover:text-white apertar`.
+- **Botão primário**: `rounded-full bg-marca text-sobre-marca hover:bg-marca-forte apertar`. Secundário: `rounded-full border border-marca text-marca hover:bg-marca hover:text-sobre-marca apertar`.
 
 ## Movimento
 

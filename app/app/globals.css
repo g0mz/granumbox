@@ -8,6 +8,7 @@
   --tinta-2: #6e4a33; /* texto secundário */
   --marca: #773811; /* marrom do logo: ações, destaques, notas */
   --marca-forte: #5a290b; /* hover/pressionado */
+  --sobre-marca: #ffffff; /* texto sobre fundo marca */
   --linha: rgb(119 56 17 / 0.18);
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -20,6 +21,7 @@
     --tinta-2: #c9ae95;
     --marca: #d9925a;
     --marca-forte: #e8a873;
+    --sobre-marca: #1c120b;
     --linha: rgb(243 230 216 / 0.16);
   }
 }
@@ -31,6 +33,7 @@
   --color-tinta-2: var(--tinta-2);
   --color-marca: var(--marca);
   --color-marca-forte: var(--marca-forte);
+  --color-sobre-marca: var(--sobre-marca);
   --color-linha: var(--linha);
   --font-sans: var(--font-poppins);
   --font-display: var(--font-courgette);

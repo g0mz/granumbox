@@ -31,7 +31,7 @@ export default async function Home() {
           <Image src="/logo.svg" alt="" width={32} height={32} />
           GranumBox
         </span>
-        <Link href="/painel" className="apertar rounded-full border border-marca text-marca px-4 py-2 text-sm font-medium hover:bg-marca hover:text-white">
+        <Link href="/painel" className="apertar rounded-full border border-marca text-marca px-4 py-2 text-sm font-medium hover:bg-marca hover:text-sobre-marca">
           Painel do produtor
         </Link>
       </nav>
@@ -45,10 +45,10 @@ export default async function Home() {
             Um QR no pacote mostra o lote e quem plantou. A nota de quem bebeu volta para o produtor.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href={url} className="apertar rounded-full bg-marca px-6 py-3.5 font-medium text-white hover:bg-marca-forte">
+            <Link href={url} className="apertar rounded-full bg-marca px-6 py-3.5 font-medium text-sobre-marca hover:bg-marca-forte">
               Abrir o lote de exemplo
             </Link>
-            <a href="#planos" className="apertar rounded-full border border-marca text-marca px-6 py-3.5 font-medium hover:bg-marca hover:text-white">
+            <a href="#planos" className="apertar rounded-full border border-marca text-marca px-6 py-3.5 font-medium hover:bg-marca hover:text-sobre-marca">
               Ver planos
             </a>
           </div>
@@ -100,24 +100,24 @@ export default async function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pb-20 sm:px-6">
-        <div className="grid gap-10 rounded-3xl bg-marca p-8 text-white sm:p-12 md:grid-cols-[1.2fr_1fr] md:items-center">
+        <div className="grid gap-10 rounded-3xl bg-marca p-8 text-sobre-marca sm:p-12 md:grid-cols-[1.2fr_1fr] md:items-center">
           <div>
             <h2 className="text-3xl font-semibold leading-tight tracking-tight">
               O selo de origem diz de onde o café vem. O GranumBox mostra o que acharam dele.
             </h2>
-            <p className="mt-5 max-w-[50ch] leading-relaxed text-white/85">
+            <p className="mt-5 max-w-[50ch] leading-relaxed text-sobre-marca/85">
               O Norte Pioneiro ganhou Denominação de Origem em 2025, e o selo da IG já rastreia a procedência. O
               GranumBox soma o que falta: a história da família e a opinião verificada de quem bebeu, lote por lote.
             </p>
           </div>
-          <ul className="space-y-4 text-white/90">
+          <ul className="space-y-4 text-sobre-marca/90">
             {[
               ["Para o produtor", "Argumento com dados para vender melhor a próxima safra."],
               ["Para a cooperativa", "Uma página por associado e a visão da região inteira."],
               ["Para quem compra", "Saber quem plantou, sem baixar aplicativo."],
             ].map(([t, d]) => (
-              <li key={t} className="border-t border-white/25 pt-4">
-                <p className="font-semibold text-white">{t}</p>
+              <li key={t} className="border-t border-sobre-marca/25 pt-4">
+                <p className="font-semibold text-sobre-marca">{t}</p>
                 <p className="mt-1 text-sm leading-relaxed">{d}</p>
               </li>
             ))}

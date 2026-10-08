@@ -29,7 +29,7 @@ function Escala({
             aria-label={`${rotulo}: ${i} de 5`}
             onClick={() => onChange(i)}
             className={`apertar h-11 rounded-xl border font-mono text-sm ${
-              valor === i ? "border-marca bg-marca text-white" : "border-linha hover:border-tinta"
+              valor === i ? "border-marca bg-marca text-sobre-marca" : "border-linha hover:border-tinta"
             }`}
           >
             {i}
@@ -132,7 +132,7 @@ export function FormAvaliacao({ loteId, codigo }: { loteId: string; codigo?: str
       )}
       <button
         disabled={estado === "enviando"}
-        className="apertar h-12 w-full rounded-full bg-marca font-medium text-white hover:bg-marca-forte disabled:opacity-60"
+        className="apertar h-12 w-full rounded-full bg-marca font-medium text-sobre-marca hover:bg-marca-forte disabled:opacity-60"
       >
         {estado === "enviando" ? "Enviando avaliação" : "Enviar avaliação"}
       </button>

@@ -29,10 +29,10 @@ export default async function Painel() {
           GranumBox
         </Link>
         <div className="flex items-center gap-3">
-          <Link href="/apresentar" className="apertar hidden rounded-full border border-marca px-4 py-2 text-sm font-medium text-marca hover:bg-marca hover:text-white sm:inline-block">
+          <Link href="/apresentar" className="apertar hidden rounded-full border border-marca px-4 py-2 text-sm font-medium text-marca hover:bg-marca hover:text-sobre-marca sm:inline-block">
             Modo apresentação
           </Link>
-          <Link href="/painel/novo" className="apertar rounded-full bg-marca px-4 py-2 text-sm font-medium text-white hover:bg-marca-forte">
+          <Link href="/painel/novo" className="apertar rounded-full bg-marca px-4 py-2 text-sm font-medium text-sobre-marca hover:bg-marca-forte">
             Cadastrar lote
           </Link>
         </div>
@@ -63,7 +63,7 @@ export default async function Painel() {
             <div className="flex flex-col items-start gap-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={l.png} alt={`QR do lote ${l.marcacao}`} className="size-36 bg-white" />
-              <a href={l.png} download={`granumbox-${l.marcacao}.png`} className="apertar rounded-full bg-marca px-4 py-2 text-sm font-medium text-white hover:bg-marca-forte">
+              <a href={l.png} download={`granumbox-${l.marcacao}.png`} className="apertar rounded-full bg-marca px-4 py-2 text-sm font-medium text-sobre-marca hover:bg-marca-forte">
                 Baixar QR
               </a>
             </div>

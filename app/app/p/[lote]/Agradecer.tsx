@@ -25,7 +25,7 @@ export function Agradecer({ loteId, nome, inicial }: { loteId: string; nome: str
         onClick={enviar}
         disabled={feito}
         aria-live="polite"
-        className="apertar rounded-full border border-marca px-5 py-2.5 font-medium text-marca hover:bg-marca hover:text-white disabled:border-linha disabled:bg-transparent disabled:text-tinta-2"
+        className="apertar rounded-full border border-marca px-5 py-2.5 font-medium text-marca hover:bg-marca hover:text-sobre-marca disabled:border-linha disabled:bg-transparent disabled:text-tinta-2"
       >
         {feito && !aviso ? "Obrigado enviado" : "Agradecer ao produtor"}
       </button>

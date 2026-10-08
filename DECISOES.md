@@ -4,6 +4,10 @@ Registro curto do que foi decidido e por quê. Adicione no topo, com data.
 
 ## 2026-10-08
 
+**Veredito no topo da página do lote (referência: passaportes digitais de produto).** Ao escanear, a primeira coisa é "Pacote original verificado" ou "Este QR não confere com o lote". Inspirado no padrão dos Digital Product Passports da UE e em plataformas de autenticidade, que mostram o veredito antes dos dados. Do Algrano (marketplace de café verde) veio a separação entre dados técnicos do lote e história das pessoas.
+
+**Token `sobre-marca` para contraste.** No modo escuro a marca clareia para #D9925A e texto branco ficava em ~2,4:1. Todo texto sobre `marca` usa `sobre-marca` (branco no claro, marrom-escuro no escuro).
+
 **Desafio escolhido: #6 Café com Valor.** O manual exige vínculo a um dos 8 gargalos oficiais. O GranumBox responde à pergunta do desafio ("usar tecnologia e informação para analisar, valorizar e diferenciar o café do Norte Pioneiro") transformando a opinião de quem bebe em dado de qualidade por lote. Pitch em 09/10 às 9h.
 
 **Modelo de negócio: assinatura mensal paga pelo produtor (B2B).** O consumidor nunca paga nem instala app: o QR abre no navegador. Planos: Grão R$ 49, Safra R$ 99, Cooperativa sob consulta. Preços são proposta, não validados.

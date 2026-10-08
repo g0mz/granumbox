@@ -12,7 +12,7 @@ const campos: { nome: string; rotulo: string; dica?: string; obrigatorio?: boole
   { nome: "colheita", rotulo: "Colheita", dica: "Ex.: Junho de 2026" },
   { nome: "safra", rotulo: "Safra", dica: "Ex.: 2026", modo: "numeric" },
   { nome: "torra", rotulo: "Torra", dica: "Ex.: Média" },
-  { nome: "pontuacaoSCA", rotulo: "Pontuação SCA", dica: "Se o lote foi classificado. Ex.: 84,5", modo: "decimal" },
+  { nome: "pontuacaoSCA", rotulo: "Pontuação SCA", dica: "Se classificado. Ex.: 84,5", modo: "decimal" },
 ];
 
 export function NovoLote() {
@@ -78,7 +78,7 @@ export function NovoLote() {
                     aria-label={`${a.nome}: ${i} de 5`}
                     onClick={() => setPerfil((p) => ({ ...p, [a.chave]: i }))}
                     className={`apertar h-10 rounded-xl border font-mono text-sm ${
-                      perfil[a.chave] === i ? "border-marca bg-marca text-white" : "border-linha bg-fundo hover:border-marca"
+                      perfil[a.chave] === i ? "border-marca bg-marca text-sobre-marca" : "border-linha bg-fundo hover:border-marca"
                     }`}
                   >
                     {i}
@@ -101,7 +101,7 @@ export function NovoLote() {
       )}
       <button
         disabled={salvando}
-        className="apertar h-12 w-full rounded-full bg-marca font-medium text-white hover:bg-marca-forte disabled:opacity-60 sm:w-auto sm:px-10"
+        className="apertar h-12 w-full rounded-full bg-marca font-medium text-sobre-marca hover:bg-marca-forte disabled:opacity-60 sm:w-auto sm:px-10"
       >
         {salvando ? "Salvando lote" : "Salvar lote e gerar QR"}
       </button>
