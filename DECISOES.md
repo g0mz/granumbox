@@ -15,7 +15,7 @@ Registro curto do que foi decidido e por quê. Adicione no topo, com data.
 | shadcn/ui dashboard-01 | Faixa de indicadores no topo, lista abaixo | Faixa de 4 indicadores no painel | Ficha de prova visual por lote no lugar de gráfico genérico |
 | 21st.dev / guias de rating acessível | Rating com teclado, alvos de 44px, valor escrito | Escala 1 a 5 como radiogroup, 44px, "4 de 5" | Círculos da marca no lugar de estrelas, iguais em todo o produto |
 
-Visualmente, as referências usam linguagem corporativa genérica (verde, azul, ícones de folha). O GranumBox se diferencia pela identidade do próprio logo: a caixa de papelão vira superfície, a etiqueta colada vira assinatura, e o marrom é a única cor de ação.
+A comparação acima é de padrões de produto, não de telas: o visual das referências não foi inspecionado. O GranumBox se diferencia pela identidade do próprio logo: a caixa de papelão vira superfície, a etiqueta colada vira assinatura, e o marrom é a única cor de ação.
 
 **Referências de componentes (21st.dev, shadcn/ui blocks, guias de acessibilidade de rating).** A escala de nota virou `radiogroup` com `role="radio"`, alvos de 44px e o valor escrito ao lado ("4 de 5"); a nota exibida é um único `role="img"` com rótulo, como recomenda a documentação de acessibilidade do eBay Evo. Do dashboard-01 do shadcn veio a faixa de indicadores no topo do painel (nota média, avaliações, agradecimentos, lotes).
 
