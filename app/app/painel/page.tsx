@@ -66,9 +66,9 @@ export default async function Painel() {
           <article key={l.id} className="grid gap-8 bg-caixa p-6 md:grid-cols-[auto_1fr_1.2fr] md:p-8">
             <div className="flex flex-col items-start gap-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={l.png} alt={`QR do lote ${l.marcacao}`} className="size-36 bg-white" />
+              <img src={l.png} alt={`QR code do lote ${l.marcacao}`} className="size-36 bg-white" />
               <a href={l.png} download={`granumbox-${l.marcacao}.png`} className="apertar rounded-full bg-marca px-4 py-2 text-sm font-medium text-sobre-marca hover:bg-marca-forte">
-                Baixar QR
+                Baixar QR code
               </a>
             </div>
             <div>
@@ -89,7 +89,7 @@ export default async function Painel() {
                     </span>
                   </>
                 ) : (
-                  <span className="text-sm text-tinta-2">Nenhuma avaliação ainda. Imprima o QR e coloque nos pacotes.</span>
+                  <span className="text-sm text-tinta-2">Nenhuma avaliação ainda. Imprima o QR code e coloque nos pacotes.</span>
                 )}
               </p>
               <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-marca">

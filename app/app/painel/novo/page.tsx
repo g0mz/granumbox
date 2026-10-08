@@ -9,7 +9,7 @@ export default function Novo() {
       </Link>
       <h1 className="mt-4 text-3xl font-semibold tracking-tight">Cadastrar lote</h1>
       <p className="mt-2 text-tinta-2">
-        Leva dois minutos. Ao salvar, o lote ganha um código, uma página própria e o QR para imprimir.
+        Leva dois minutos. Ao salvar, o lote ganha um código, uma página própria e o QR code para imprimir.
       </p>
       <NovoLote />
     </main>

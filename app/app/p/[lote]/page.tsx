@@ -39,13 +39,13 @@ export default async function PaginaLote({
           <p className="flex items-start gap-3 rounded-2xl bg-marca px-4 py-3 text-sobre-marca">
             <span aria-hidden className="mt-1.5 size-2.5 shrink-0 rounded-full bg-sobre-marca" />
             <span>
-              <span className="font-semibold">Pacote original verificado.</span> Este QR corresponde ao lote{" "}
+              <span className="font-semibold">Pacote original verificado.</span> Este QR code corresponde ao lote{" "}
               <span className="font-mono">{lote.marcacao}</span> selecionado pelo GranumBox no {produtor.fazenda}.
             </span>
           </p>
         ) : c ? (
           <p className="rounded-2xl border border-marca px-4 py-3">
-            <span className="font-semibold text-marca">Este QR não confere com o lote.</span> Você pode ver a origem, mas
+            <span className="font-semibold text-marca">Este QR code não confere com o lote.</span> Você pode ver a origem, mas
             não pode avaliar. Se o código estiver no pacote, avise quem vendeu.
           </p>
         ) : null}

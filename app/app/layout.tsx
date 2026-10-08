@@ -8,7 +8,7 @@ const mono = IBM_Plex_Mono({ variable: "--font-plex-mono", subsets: ["latin"], w
 
 export const metadata: Metadata = {
   title: "GranumBox",
-  description: "Um QR na embalagem liga quem bebe o café a quem plantou.",
+  description: "Um QR code na embalagem liga quem bebe o café a quem plantou.",
   icons: { icon: "/logo.svg" },
 };
 

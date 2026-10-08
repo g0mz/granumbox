@@ -12,7 +12,7 @@ export type Perfil = Record<Atributo, number>; // 1 a 5
 
 export type Lote = {
   id: string;
-  codigo: string; // segredo impresso só no QR: prova que a pessoa teve o pacote em mãos
+  codigo: string; // segredo impresso só no QR code: prova que a pessoa teve o pacote em mãos
   marcacao: string; // como aparece no estêncil da saca
   variedade: string;
   processo: string;

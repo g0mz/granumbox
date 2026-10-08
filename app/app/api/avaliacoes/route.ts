@@ -12,9 +12,9 @@ export async function POST(req: Request) {
   const body = await req.json().catch(() => null);
   const lote = body && (await acharLote(String(body.loteId)));
 
-  // Só avalia quem escaneou o QR do pacote: o código do lote só existe impresso na embalagem.
+  // Só avalia quem escaneou o QR code do pacote: o código do lote só existe impresso na embalagem.
   if (!lote || body.codigo !== lote.codigo) {
-    return NextResponse.json({ erro: "Escaneie o QR do pacote para avaliar." }, { status: 403 });
+    return NextResponse.json({ erro: "Escaneie o QR code do pacote para avaliar." }, { status: 403 });
   }
   const nota = escala(body.nota);
   if (!nota) return NextResponse.json({ erro: "Dê uma nota de 1 a 5." }, { status: 400 });

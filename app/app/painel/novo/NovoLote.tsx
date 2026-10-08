@@ -103,7 +103,7 @@ export function NovoLote() {
         disabled={salvando}
         className="apertar h-12 w-full rounded-full bg-marca font-medium text-sobre-marca hover:bg-marca-forte disabled:opacity-60 sm:w-auto sm:px-10"
       >
-        {salvando ? "Salvando lote" : "Salvar lote e gerar QR"}
+        {salvando ? "Salvando lote" : "Salvar lote e gerar QR code"}
       </button>
     </form>
   );

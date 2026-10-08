@@ -38,7 +38,7 @@ function Legenda({ dado, children, className = "" }: { dado: string; children: R
 // Municípios do Norte Pioneiro no muro da seção de origem (conferir com a equipe).
 const cidadesNortePioneiro = ["Pinhalão", "Carlópolis", "Tomazina", "Jacarezinho", "Ribeirão Claro", "Santo Antônio da Platina", "Joaquim Távora", "Siqueira Campos", "Ibaiti", "Japira", "Wenceslau Braz"];
 
-const sombra = "drop-shadow-[0_18px_16px_rgb(0_0_0/0.4)]";
+const sombra ="drop-shadow-[0_18px_16px_rgb(0_0_0/0.4)]";
 /** Etapas do ciclo; `pos` coloca cada objeto num ponto do círculo no desktop. */
 const etapas = [
   {
@@ -56,7 +56,7 @@ const etapas = [
     pos: "left-[88%] top-[50%]",
     dado: "Lote 26-AM-07",
     titulo: "Embalamos com a história",
-    texto: "Rótulo com sítio, altitude e notas, e um QR do lote.",
+    texto: "Rótulo com sítio, altitude e notas, e um QR code do lote.",
     objeto: <Image src="/produto/pacote.webp" alt="Pacote GranumBox" width={1122} height={1402} sizes="120px" className={`h-auto w-full lg:h-36 lg:w-auto ${sombra}`} />,
   },
   {
@@ -68,10 +68,10 @@ const etapas = [
   },
   {
     pos: "left-[12%] top-[50%]",
-    dado: "QR do lote",
+    dado: "QR code do lote",
     titulo: "Sua nota volta ao sítio",
     texto: "Você escaneia, prova e avalia. A opinião chega ao produtor.",
-    objeto: <Image src="/produto/cartao.webp" alt="Cartão do lote com QR" width={1024} height={1536} sizes="100px" className={`h-auto w-full -rotate-3 lg:h-32 lg:w-auto ${sombra}`} />,
+    objeto: <Image src="/produto/cartao.webp" alt="Cartão do lote com QR code" width={1024} height={1536} sizes="100px" className={`h-auto w-full -rotate-3 lg:h-32 lg:w-auto ${sombra}`} />,
   },
 ];
 
@@ -108,12 +108,12 @@ export default async function Home() {
               Direto das mãos de quem planta.
             </h1>
             <p className="mt-8 max-w-[46ch] text-lg leading-relaxed text-sobre-escuro/80">
-              Todo mês, cafés especiais de famílias do Norte Pioneiro do Paraná na sua porta. Cada pacote traz um QR com a história de quem plantou.
+              Todo mês, cafés especiais de famílias do Norte Pioneiro do Paraná na sua porta. Cada pacote traz um QR code com a história de quem plantou.
             </p>
           </div>
 
-          {/* Destaque da caixa: fica inteiro na área escura, à direita da etiqueta */}
-          <div className="relative z-20 mt-12 max-w-xs md:absolute md:bottom-16 md:left-[18.5rem] md:mt-0 lg:left-[calc(44%+18rem)] lg:max-w-[19rem]">
+          {/* Destaque da caixa com a etiqueta do lote logo abaixo */}
+          <div className="relative z-20 mt-12 max-w-xs md:absolute md:-bottom-36 md:left-[18.5rem] md:mt-0 lg:left-[calc(44%+18rem)] lg:max-w-[19rem]">
             <span className="inline-block rounded-full border border-sobre-escuro/40 px-3 py-1 text-xs">Na caixa de outubro</span>
             <p className="mt-4 text-2xl font-bold">
               {destaque.variedade}, {destaque.processo.toLowerCase()}
@@ -122,38 +122,33 @@ export default async function Home() {
               {destaque.notasSensoriais.join(", ")}. {destaque.pontuacaoSCA && `${sca(destaque.pontuacaoSCA)} pontos SCA, `}
               {destaque.altitude} de altitude.
             </p>
+            {/* Etiqueta do lote logo abaixo do destaque, atravessando a divisa */}
+            <div className="relative z-30 mt-8 w-56">
+              <Link
+                href={url}
+                className="block -rotate-3 rounded-md bg-creme-fixo p-4 text-[#3a1a07] shadow-[0_24px_50px_-12px_rgb(0_0_0/0.6)] transition-transform hover:-rotate-1"
+              >
+                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#6e4a33]">
+                  {produtor.cidade}, {produtor.uf}
+                </p>
+                <p className="font-display text-2xl leading-tight text-[#773811]">{produtor.fazenda}</p>
+                <div className="mt-3 flex items-end justify-between gap-3 border-t border-dashed border-[#773811]/40 pt-3">
+                  <dl className="text-[11px] leading-5">
+                    <dt className="sr-only">Lote</dt>
+                    <dd className="font-mono font-medium">{destaque.marcacao}</dd>
+                    <dd>{destaque.variedade}</dd>
+                    <dd>{destaque.processo}</dd>
+                  </dl>
+                  <div className="size-16 shrink-0" role="img" aria-label="QR code do lote" dangerouslySetInnerHTML={{ __html: qr }} />
+                </div>
+                <p className="mt-3 text-[10px] text-[#6e4a33]">
+                  Selecionado por <span className="font-display text-xs text-[#773811]">granum</span>
+                  <span className="font-extrabold text-[#773811]">box</span>
+                </p>
+              </Link>
+            </div>
           </div>
 
-          {/* Monte de grãos atravessando a divisa, atrás da etiqueta */}
-          <div aria-hidden className="pointer-events-none absolute -bottom-12 left-[11rem] z-10 hidden w-[30rem] md:block lg:left-[calc(44%+5rem)]">
-            <Image src="/recortes/graos-monte.png" alt="" width={1000} height={174} className="h-auto w-full drop-shadow-[0_12px_14px_rgb(0_0_0/0.35)]" />
-          </div>
-
-          {/* Etiqueta do lote atravessando a divisa, com o botão redondo por cima */}
-          <div className="relative z-30 mt-10 w-56 md:absolute md:-bottom-32 md:left-6 md:mt-0 lg:left-[44%]">
-            <Link
-              href={url}
-              className="block -rotate-3 rounded-md bg-creme-fixo p-4 text-[#3a1a07] shadow-[0_24px_50px_-12px_rgb(0_0_0/0.6)] transition-transform hover:-rotate-1"
-            >
-              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#6e4a33]">
-                {produtor.cidade}, {produtor.uf}
-              </p>
-              <p className="font-display text-2xl leading-tight text-[#773811]">{produtor.fazenda}</p>
-              <div className="mt-3 flex items-end justify-between gap-3 border-t border-dashed border-[#773811]/40 pt-3">
-                <dl className="text-[11px] leading-5">
-                  <dt className="sr-only">Lote</dt>
-                  <dd className="font-mono font-medium">{destaque.marcacao}</dd>
-                  <dd>{destaque.variedade}</dd>
-                  <dd>{destaque.processo}</dd>
-                </dl>
-                <div className="size-16 shrink-0" role="img" aria-label="QR do lote" dangerouslySetInnerHTML={{ __html: qr }} />
-              </div>
-              <p className="mt-3 text-[10px] text-[#6e4a33]">
-                Selecionado por <span className="font-display text-xs text-[#773811]">granum</span>
-                <span className="font-extrabold text-[#773811]">box</span>
-              </p>
-            </Link>
-          </div>
 
           {/* Mãos com grãos à direita; o filete de grãos atravessa a divisa */}
           <div className="pointer-events-none relative z-20 mx-auto mt-8 w-full max-w-sm md:absolute md:top-2 md:right-0 md:mb-0 md:mt-0 md:w-[45%] md:max-w-none lg:-right-4 xl:-right-12">
@@ -176,7 +171,7 @@ export default async function Home() {
         <div className="relative mx-auto max-w-6xl px-4 pb-24 pt-48 sm:px-6 md:pt-60">
           <CafesPrateleira
             titulo={
-              <h2 className="text-5xl font-extrabold leading-[1] tracking-[-0.035em] sm:text-6xl">Os cafés desta caixa</h2>
+              <h2 className="text-5xl font-extrabold leading-[1] tracking-[-0.035em] sm:text-6xl">Cafés de cada mês</h2>
             }
             cafes={doMes.map((l) => ({
               id: l.id,
@@ -226,9 +221,9 @@ export default async function Home() {
 
             {/* Cartão do lote à direita */}
             <figure className="relative mt-12 md:absolute md:right-0 md:top-0 md:mt-0 md:w-[24%]">
-              <Image src="/produto/cartao.webp" alt="Cartão do lote com a história da família produtora e um QR para avaliar o café" width={1024} height={1536} sizes="(min-width: 768px) 24vw, 70vw" className="mx-auto h-auto w-2/3 rotate-2 drop-shadow-[0_24px_24px_rgb(31_18_9/0.3)] md:w-full" />
-              <Legenda className="md:absolute md:-bottom-24 md:right-0 md:w-[15rem]" dado="QR do lote">
-                O cartão conta a história do sítio. O QR abre a ficha para você avaliar.
+              <Image src="/produto/cartao.webp" alt="Cartão do lote com a história da família produtora e um QR code para avaliar o café" width={1024} height={1536} sizes="(min-width: 768px) 24vw, 70vw" className="mx-auto h-auto w-2/3 rotate-2 drop-shadow-[0_24px_24px_rgb(31_18_9/0.3)] md:w-full" />
+              <Legenda className="md:absolute md:-bottom-24 md:right-0 md:w-[15rem]" dado="QR code do lote">
+                O cartão conta a história do sítio. O QR code abre a ficha para você avaliar.
               </Legenda>
             </figure>
           </div>

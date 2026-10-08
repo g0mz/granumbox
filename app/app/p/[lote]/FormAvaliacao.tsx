@@ -60,7 +60,7 @@ export function FormAvaliacao({ loteId, codigo }: { loteId: string; codigo?: str
   if (!codigo) {
     return (
       <p className="border-l-2 border-marca pl-4 text-tinta-2">
-        Para avaliar, escaneie o QR impresso no pacote. Só quem tem o café em mãos pode dar nota.
+        Para avaliar, escaneie o QR code impresso no pacote. Só quem tem o café em mãos pode dar nota.
       </p>
     );
   }
