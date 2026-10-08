@@ -337,7 +337,7 @@ export default async function Home() {
               fica sabendo.
             </h2>
             <p className="mt-6 max-w-[44ch] leading-relaxed text-tinta-2">
-              O QR do cartão abre esta ficha. Dez segundos de nota para doçura, acidez, corpo e finalização, e um recado se quiser. A cooperativa entrega para a família.
+              O QR code do cartão abre esta ficha. Dez segundos para dizer se o café é doce, se lembra fruta, se é leve ou encorpado e se o sabor continua na boca, e um recado se quiser. A cooperativa entrega para a família.
             </p>
             <p className="mt-4 font-mono text-xs text-marca">Experimente: arraste os controles e envie.</p>
           </div>

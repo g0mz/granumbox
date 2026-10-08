@@ -4,6 +4,8 @@ Registro curto do que foi decidido e por quê. Adicione no topo, com data.
 
 ## 2026-10-08
 
+**Avaliação em palavras do dia a dia** (pedido da equipe). O cliente não sabe o que é "corpo" ou "finalização". No formulário e nos gráficos: Doce, Sabor de fruta, Leve ou encorpado e Sabor depois de beber, cada um com uma pergunta direta ("O café lembra alguma fruta?"). Sem gíria nem comparação (a primeira versão, com "docinho" e "leite integral", foi recusada pela equipe). As chaves dos dados não mudaram. O termo técnico da prova SCA (`tecnico` em `ATRIBUTOS`) aparece só no painel de curadoria.
+
 **Página `/produtores` com storytelling** (pedido da equipe: "é o nosso diferencial"). Seis etapas do pé à xícara, seção "Quem faz" e cartões por família com fotos, pessoas, contato, avaliações e cafés do sítio. A ficha `/p/[lote]` funciona para os lotes de todas as famílias e mostra fotos, pessoas e outros cafés do sítio. Duas famílias (Bortolato, Tanaka), pessoas, telefones (`(43) 99000-0x0x`), e-mails (`.example`) e fotos (Unsplash) são fictícios para a demo. Também há avaliações de exemplo (`avaliacoesDemo`), o que contraria a regra "nunca depoimento inventado" do mural da home; a equipe precisa decidir se elas ficam.
 
 **Deploy na Cloudflare via OpenNext (Workers, não Pages).** O site renderiza no servidor (home dinâmica, rotas de API, Redis), e o Pages só serve arquivos estáticos. Adicionados `@opennextjs/cloudflare`, `wrangler.jsonc` (worker `granumbox`) e os scripts `preview`/`deploy`; Next subiu para 15.5.27 (exigência do adaptador). Sem otimizador de imagem no Workers: `images.unoptimized` e os PNGs do produto viraram WebP de ~100 KB. Substitui "deploy adiado".

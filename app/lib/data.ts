@@ -1,10 +1,11 @@
 // Dados de demonstração. Produtor e associação fictícios; trocar pelos parceiros reais.
 
+/* Como o cliente sente o café, em palavras simples, sem termo técnico nem gíria. `tecnico` é o termo da prova (SCA), usado só no painel. */
 export const ATRIBUTOS = [
-  { chave: "docura", nome: "Doçura", min: "pouca", max: "muita" },
-  { chave: "acidez", nome: "Acidez", min: "suave", max: "vibrante" },
-  { chave: "corpo", nome: "Corpo", min: "leve", max: "encorpado" },
-  { chave: "finalizacao", nome: "Finalização", min: "curta", max: "longa" },
+  { chave: "docura", nome: "Doce", tecnico: "Doçura", pergunta: "O café parece doce, mesmo sem açúcar?", min: "nada doce", max: "muito doce" },
+  { chave: "acidez", nome: "Sabor de fruta", tecnico: "Acidez", pergunta: "O café lembra alguma fruta?", min: "não lembra", max: "lembra muito" },
+  { chave: "corpo", nome: "Leve ou encorpado", tecnico: "Corpo", pergunta: "Na boca, o café é leve ou encorpado?", min: "leve", max: "encorpado" },
+  { chave: "finalizacao", nome: "Sabor depois de beber", tecnico: "Finalização", pergunta: "O sabor continua na boca depois de beber?", min: "some logo", max: "continua bastante" },
 ] as const;
 
 export type Atributo = (typeof ATRIBUTOS)[number]["chave"];

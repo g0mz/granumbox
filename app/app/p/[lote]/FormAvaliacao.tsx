@@ -8,12 +8,14 @@ function Escala({
   valor,
   onChange,
   rotulo,
+  dica,
   min,
   max,
 }: {
   valor?: number;
   onChange: (v: number) => void;
   rotulo: string;
+  dica?: string;
   min: string;
   max: string;
 }) {
@@ -25,6 +27,7 @@ function Escala({
           {valor ? `${valor} de 5` : ""}
         </span>
       </legend>
+      {dica && <p className="mt-0.5 text-sm text-tinta-2">{dica}</p>}
       <div role="radiogroup" aria-label={rotulo} className="mt-2 grid grid-cols-5 gap-1.5">
         {[1, 2, 3, 4, 5].map((i) => (
           <button
@@ -101,11 +104,12 @@ export function FormAvaliacao({ loteId, codigo }: { loteId: string; codigo?: str
       <Escala rotulo="Nota geral" min="não gostei" max="excelente" valor={nota} onChange={setNota} />
 
       <div className="space-y-5 border-t border-linha pt-5">
-        <p className="text-sm text-tinta-2">Opcional: como você sentiu o café na xícara?</p>
+        <p className="text-sm text-tinta-2">Opcional: conte como o café pareceu para você. Não existe resposta certa.</p>
         {ATRIBUTOS.map((a) => (
           <Escala
             key={a.chave}
             rotulo={a.nome}
+            dica={a.pergunta}
             min={a.min}
             max={a.max}
             valor={perfil[a.chave]}

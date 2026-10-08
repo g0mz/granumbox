@@ -68,7 +68,7 @@ export function NovoLote() {
         <div className="mt-5 grid gap-5 sm:grid-cols-2">
           {ATRIBUTOS.map((a) => (
             <div key={a.chave}>
-              <p className="font-medium">{a.nome}</p>
+              <p className="font-medium">{a.tecnico} <span className="font-normal text-tinta-2">({a.nome.toLowerCase()})</span></p>
               <div className="mt-2 grid grid-cols-5 gap-1.5">
                 {[1, 2, 3, 4, 5].map((i) => (
                   <button
