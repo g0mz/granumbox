@@ -112,7 +112,7 @@ export default async function Home() {
           {/* Mãos com grãos à direita; o filete de grãos atravessa a divisa */}
           <div className="pointer-events-none relative z-20 mx-auto mt-8 w-full max-w-sm md:absolute md:top-2 md:right-0 md:mb-0 md:mt-0 md:w-[45%] md:max-w-none lg:-right-4 xl:-right-12">
             <Image
-              src="/recortes/maos-graos.png"
+              src="/recortes/maos.png"
               alt="Mãos segurando grãos de café torrado"
               width={824}
               height={541}
