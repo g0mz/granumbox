@@ -4,6 +4,10 @@ Registro curto do que foi decidido e por quê. Adicione no topo, com data.
 
 ## 2026-10-08
 
+**Referências de componentes (21st.dev, shadcn/ui blocks, guias de acessibilidade de rating).** A escala de nota virou `radiogroup` com `role="radio"`, alvos de 44px e o valor escrito ao lado ("4 de 5"); a nota exibida é um único `role="img"` com rótulo, como recomenda a documentação de acessibilidade do eBay Evo. Do dashboard-01 do shadcn veio a faixa de indicadores no topo do painel (nota média, avaliações, agradecimentos, lotes).
+
+**Deploy pendente.** Não há sessão da Vercel na máquina; precisa de `npx vercel login` da equipe ou importação do repositório pelo site.
+
 **Veredito no topo da página do lote (referência: passaportes digitais de produto).** Ao escanear, a primeira coisa é "Pacote original verificado" ou "Este QR não confere com o lote". Inspirado no padrão dos Digital Product Passports da UE e em plataformas de autenticidade, que mostram o veredito antes dos dados. Do Algrano (marketplace de café verde) veio a separação entre dados técnicos do lote e história das pessoas.
 
 **Token `sobre-marca` para contraste.** No modo escuro a marca clareia para #D9925A e texto branco ficava em ~2,4:1. Todo texto sobre `marca` usa `sobre-marca` (branco no claro, marrom-escuro no escuro).

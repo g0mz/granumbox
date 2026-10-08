@@ -19,13 +19,19 @@ function Escala({
 }) {
   return (
     <fieldset>
-      <legend className="font-medium">{rotulo}</legend>
-      <div className="mt-2 grid grid-cols-5 gap-1.5">
+      <legend className="flex w-full justify-between font-medium">
+        <span>{rotulo}</span>
+        <span className="font-mono text-sm text-tinta-2" aria-hidden>
+          {valor ? `${valor} de 5` : ""}
+        </span>
+      </legend>
+      <div role="radiogroup" aria-label={rotulo} className="mt-2 grid grid-cols-5 gap-1.5">
         {[1, 2, 3, 4, 5].map((i) => (
           <button
             key={i}
             type="button"
-            aria-pressed={valor === i}
+            role="radio"
+            aria-checked={valor === i}
             aria-label={`${rotulo}: ${i} de 5`}
             onClick={() => onChange(i)}
             className={`apertar h-11 rounded-xl border font-mono text-sm ${

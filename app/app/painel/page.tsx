@@ -3,7 +3,7 @@ import Link from "next/link";
 import QRCode from "qrcode";
 import { produtor, sca } from "@/lib/data";
 import { urlDoLote } from "@/lib/origem";
-import { listarAvaliacoes, listarLotes, resumo } from "@/lib/store";
+import { contarObrigados, listarAvaliacoes, listarLotes, resumo } from "@/lib/store";
 import { FichaProva } from "@/components/FichaProva";
 import { Nota } from "@/components/Nota";
 
@@ -12,6 +12,7 @@ export const dynamic = "force-dynamic";
 export default async function Painel() {
   const todas = await listarAvaliacoes();
   const geral = resumo(todas);
+  const obrigados = await contarObrigados();
 
   const lotes = await Promise.all(
     (await listarLotes()).map(async (l) => {
@@ -45,15 +46,18 @@ export default async function Painel() {
             {produtor.nome}, {produtor.cidade} ({produtor.uf})
           </p>
         </div>
-        <dl className="flex gap-10 font-mono">
-          <div>
-            <dt className="text-xs text-tinta-2">Nota média</dt>
-            <dd className="text-3xl">{geral.total ? geral.media.toFixed(1).replace(".", ",") : "-"}</dd>
-          </div>
-          <div>
-            <dt className="text-xs text-tinta-2">Avaliações</dt>
-            <dd className="text-3xl">{geral.total}</dd>
-          </div>
+        <dl className="grid w-full grid-cols-2 gap-px overflow-hidden rounded-2xl bg-linha sm:grid-cols-4 md:w-auto">
+          {[
+            ["Nota média", geral.total ? geral.media.toFixed(1).replace(".", ",") : "-"],
+            ["Avaliações", String(geral.total)],
+            ["Agradecimentos", String(obrigados)],
+            ["Lotes ativos", String(lotes.length)],
+          ].map(([k, v]) => (
+            <div key={k} className="bg-caixa px-5 py-4">
+              <dt className="text-xs text-tinta-2">{k}</dt>
+              <dd className="mt-1 font-mono text-3xl">{v}</dd>
+            </div>
+          ))}
         </dl>
       </header>
 
