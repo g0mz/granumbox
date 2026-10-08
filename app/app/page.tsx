@@ -58,11 +58,7 @@ export default async function Home() {
 
         <div className="relative mx-auto max-w-6xl px-4 pb-16 sm:px-6 md:pb-60">
           <div className="grid gap-8 md:grid-cols-[13rem_1fr] lg:grid-cols-[15rem_1fr]">
-            <div className="order-2 flex items-end md:order-1 md:pt-56">
-              <Link href="/assinar" className={`${botao} bg-marca-no-escuro text-escuro hover:bg-sobre-escuro`}>
-                Assinar agora
-              </Link>
-            </div>
+            <div aria-hidden className="hidden md:block" />
             <div className="order-1 md:order-2 md:pt-6">
               <h1 className="text-[3.4rem] font-extrabold leading-[0.95] tracking-[-0.04em] sm:text-7xl lg:text-[5.4rem] xl:text-[6.2rem]">
                 Café com nome <br className="hidden md:inline" />e sobrenome.
