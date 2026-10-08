@@ -56,21 +56,18 @@ export default async function Home() {
           </div>
         </nav>
 
-        <div className="relative mx-auto max-w-6xl px-4 pb-16 sm:px-6 md:pb-60">
-          <div className="grid gap-8 md:grid-cols-[13rem_1fr] lg:grid-cols-[15rem_1fr]">
-            <div aria-hidden className="hidden md:block" />
-            <div className="order-1 md:order-2 md:pt-6">
-              <h1 className="text-[3.4rem] font-extrabold leading-[0.95] tracking-[-0.04em] sm:text-7xl lg:text-[5.4rem] xl:text-[6.2rem]">
-                Café com nome <br className="hidden md:inline" />e sobrenome.
-              </h1>
-              <p className="mt-8 max-w-[44ch] leading-relaxed text-sobre-escuro/80">
-                Todo mês, cafés especiais do Norte Pioneiro na sua porta. Cada pacote traz um QR com a história de quem plantou.
-              </p>
-            </div>
+        <div className="relative mx-auto max-w-6xl px-4 pb-16 sm:px-6 md:pb-52">
+          <div className="relative z-20 md:w-[60%] md:pt-8">
+            <h1 className="text-[3.2rem] font-extrabold leading-[0.95] tracking-[-0.04em] sm:text-7xl lg:text-[5.2rem] xl:text-[5.8rem]">
+              Direto das mãos de quem planta.
+            </h1>
+            <p className="mt-8 max-w-[46ch] text-lg leading-relaxed text-sobre-escuro/80">
+              Todo mês, cafés especiais de famílias do Norte Pioneiro do Paraná na sua porta. Cada pacote traz um QR com a história de quem plantou.
+            </p>
           </div>
 
           {/* Destaque da caixa: fica inteiro na área escura, à direita da etiqueta */}
-          <div className="relative z-20 mt-12 max-w-xs md:absolute md:bottom-16 md:left-[calc(13rem+2rem+1.5rem)] md:mt-0 lg:left-[calc(15rem+2rem+1.5rem)]">
+          <div className="relative z-20 mt-12 max-w-xs md:absolute md:bottom-16 md:left-[18.5rem] md:mt-0">
             <span className="inline-block rounded-full border border-sobre-escuro/40 px-3 py-1 text-xs">Na caixa de outubro</span>
             <p className="mt-4 text-2xl font-bold">
               {destaque.variedade}, {destaque.processo.toLowerCase()}
@@ -112,16 +109,16 @@ export default async function Home() {
             </Link>
           </div>
 
-          {/* Xícara recortada que invade a seção seguinte */}
-          <div className="pointer-events-none relative z-20 mx-auto -mb-40 mt-6 w-full max-w-md md:mb-0 md:absolute md:-bottom-32 md:-right-8 md:mt-0 md:w-[48%] md:max-w-none lg:-right-16 xl:-right-36 2xl:-right-48">
+          {/* Mãos com grãos à direita; o filete de grãos atravessa a divisa */}
+          <div className="pointer-events-none relative z-20 mx-auto mt-8 w-full max-w-sm md:absolute md:top-2 md:right-0 md:mb-0 md:mt-0 md:w-[45%] md:max-w-none lg:-right-4 xl:-right-12">
             <Image
-              src="/recortes/xicara-respingo.png"
-              alt="Xícara de café com respingo"
-              width={1100}
-              height={766}
+              src="/recortes/maos-graos.png"
+              alt="Mãos segurando grãos de café torrado"
+              width={824}
+              height={541}
               priority
-              sizes="(min-width: 768px) 52vw, 90vw"
-              className="h-auto w-full drop-shadow-[0_30px_40px_rgb(0_0_0/0.45)]"
+              sizes="(min-width: 768px) 38vw, 90vw"
+              className="h-auto w-full"
             />
           </div>
         </div>
