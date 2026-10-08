@@ -17,6 +17,9 @@ O logo é uma **caixa de papelão aberta com um grão de café**. O sistema inte
 | `marca` | `#773811` | `#D9925A` | Cor do logo. Botões, links, notas, destaques |
 | `marca-forte` | `#5A290B` | `#E8A873` | Hover e pressionado de `marca` |
 | `sobre-marca` | `#FFFFFF` | `#1C120B` | Texto e ícones sobre fundo `marca` (nunca `text-white`) |
+| `escuro` | `#1F1209` | `#1F1209` | Seções escuras da landing (topo, planos, rodapé), iguais nos dois temas |
+| `sobre-escuro` | `#F3E6D8` | `#F3E6D8` | Texto sobre `escuro` |
+| `marca-no-escuro` | `#D9925A` | `#D9925A` | Botões e destaques sobre `escuro` |
 | `linha` | marca 18% | tinta 16% | Divisórias e bordas |
 
 Regras:
@@ -60,6 +63,16 @@ Sombra só na etiqueta (é o único objeto "colado"), sempre tingida de marrom. 
 - Curva `--ease-out` (`cubic-bezier(0.23, 1, 0.32, 1)`), até 300 ms.
 - Tudo desliga em `prefers-reduced-motion`.
 - Nada de animação em scroll, marquee ou loop infinito.
+
+## Fotos
+
+- Fotos de clima (xícara, cerejas, grãos) vêm do Unsplash, com crédito no rodapé, e servem só para atmosfera.
+- Nunca usar foto de banco como se fosse um lote, uma fazenda ou um produtor específico. Cartões de lote mostram dados reais (código, pontuação SCA), não foto.
+- Prioridade: substituir por fotos reais da caixa GranumBox e das famílias parceiras assim que existirem.
+
+## Página inicial
+
+Estrutura inspirada num layout de cafeteria enviado pela equipe: topo escuro com manchete gigante (Montserrat ExtraBold) e foto, seção clara de cafés com abas por processo, seção dividida com duas fotos, ficha de prova, faixa escura de planos como vitrine, depoimentos só com avaliações reais e rodapé escuro em colunas.
 
 ## Impressão
 

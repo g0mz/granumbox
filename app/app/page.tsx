@@ -1,185 +1,274 @@
-import { Logo } from "@/components/Logo";
+import Image from "next/image";
 import Link from "next/link";
-import { edicao, planos, produtor, reais } from "@/lib/data";
+import QRCode from "qrcode";
+import { edicao, planos, produtor, reais, sca } from "@/lib/data";
 import { urlDoLote } from "@/lib/origem";
-import { Etiqueta } from "@/components/Etiqueta";
+import { listarAvaliacoes } from "@/lib/store";
+import { Logo } from "@/components/Logo";
+import { Nota } from "@/components/Nota";
 import { FichaProva } from "@/components/FichaProva";
+import { CafesComAbas } from "@/components/CafesComAbas";
 
 export const dynamic = "force-dynamic";
 
+// Fotos de clima, licença Unsplash. Não representam um lote ou produtor específico.
+const foto = (id: string, w: number) => `https://images.unsplash.com/photo-${id}?w=${w}&q=75&auto=format&fit=crop`;
+
 const caminho = [
-  ["Compramos da cooperativa", "Provamos lotes de associações e cooperativas do Norte Pioneiro e compramos os melhores, pagando o justo."],
+  ["Escolhemos na cooperativa", "Provamos lotes de associações do Norte Pioneiro e compramos os melhores, pagando o justo."],
   ["Embalamos com a história", "Cada pacote sai com a marca GranumBox e um QR do lote: quem plantou, o talhão, o processo."],
-  ["Chega na sua casa", "Todo mês, a caixa vem com cafés de produtores diferentes. Você escaneia e conhece cada um."],
-  ["Sua nota volta ao sítio", "Você avalia na xícara, e a opinião chega à família produtora pela cooperativa."],
+  ["Chega na sua porta", "Todo mês, cafés de produtores diferentes. Você escaneia e conhece cada família."],
+  ["Sua nota volta ao sítio", "Você avalia na xícara e a opinião chega ao produtor pela cooperativa."],
 ];
 
 export default async function Home() {
-  const demo = produtor.lotes[0];
-  const url = await urlDoLote(demo);
+  const destaque = produtor.lotes[0];
+  const url = await urlDoLote(destaque);
+  const qr = await QRCode.toString(url, { type: "svg", margin: 0, color: { dark: "#1f1209", light: "#0000" } });
   const doMes = produtor.lotes.filter((l) => edicao.lotes.includes(l.id));
+  const avaliacoes = (await listarAvaliacoes()).filter((a) => a.comentario).slice(0, 3);
 
   return (
     <main>
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <span className="flex items-center gap-2 font-semibold text-marca">
-          <Logo altura={44} />
-        </span>
-        <Link
-          href="/assinar"
-          className="apertar rounded-full bg-marca px-5 py-2 text-sm font-medium text-sobre-marca hover:bg-marca-forte"
-        >
-          Assinar
-        </Link>
-      </nav>
-
-      <section className="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-20 pt-10 sm:px-6 md:grid-cols-[1.1fr_1fr] md:pt-16">
-        <div>
-          <h1 className="text-[2.4rem] font-semibold leading-[1.04] tracking-[-0.03em] sm:text-5xl lg:text-6xl">
-            Todo mês, um café com nome e sobrenome na sua porta.
-          </h1>
-          <p className="mt-6 max-w-[36ch] text-lg leading-relaxed text-tinta-2">
-            Cafés especiais do Norte Pioneiro, comprados de cooperativas. Cada pacote traz um QR com a história de quem
-            plantou.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/assinar" className="apertar rounded-full bg-marca px-6 py-3.5 font-medium text-sobre-marca hover:bg-marca-forte">
-              Assinar a partir de {reais(planos[0].preco)}
-            </Link>
-            <Link href={url} className="apertar rounded-full border border-marca px-6 py-3.5 font-medium text-marca hover:bg-marca hover:text-sobre-marca">
-              Ver um pacote por dentro
+      {/* Topo escuro: manchete, chamada e destaque da caixa */}
+      <section className="relative overflow-hidden bg-escuro text-sobre-escuro">
+        <nav className="relative z-10 mx-auto flex h-20 max-w-6xl items-center justify-between px-4 sm:px-6">
+          <Logo altura={48} sobreEscuro />
+          <div className="flex items-center gap-6 text-sm">
+            <a href="#cafes" className="hidden hover:text-marca-no-escuro sm:inline">Cafés</a>
+            <a href="#planos" className="hidden hover:text-marca-no-escuro sm:inline">Planos</a>
+            <a href="#cooperativas" className="hidden hover:text-marca-no-escuro md:inline">Cooperativas</a>
+            <Link href="/assinar" className="apertar rounded-full bg-marca-no-escuro px-5 py-2 font-semibold text-escuro hover:bg-sobre-escuro">
+              Assinar
             </Link>
           </div>
-        </div>
-        <div className="mx-auto w-full max-w-md md:mr-0">
-          <Etiqueta lote={demo} qrUrl={url} giro={2} />
-          <p className="mt-6 text-center text-sm text-tinta-2 md:text-right">
-            A etiqueta de verdade. Aponte a câmera do celular para o QR.
-          </p>
+        </nav>
+
+        <div className="relative mx-auto grid max-w-6xl gap-10 px-4 pb-16 pt-8 sm:px-6 md:grid-cols-[1.15fr_1fr] md:pb-24 md:pt-12">
+          <div className="relative z-10">
+            <h1 className="text-5xl font-extrabold leading-[0.98] tracking-[-0.035em] sm:text-6xl lg:text-7xl">
+              Seu café, com nome e sobrenome.
+            </h1>
+            <p className="mt-6 max-w-[38ch] text-lg leading-relaxed text-sobre-escuro/80">
+              Todo mês, cafés especiais do Norte Pioneiro na sua porta. Cada pacote traz um QR com a história de quem plantou.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/assinar" className="apertar rounded-full bg-marca-no-escuro px-7 py-3.5 font-semibold text-escuro hover:bg-sobre-escuro">
+                Assinar a partir de {reais(planos[0].preco)}
+              </Link>
+              <a href="#cafes" className="apertar rounded-full border border-sobre-escuro/40 px-7 py-3.5 font-semibold hover:border-sobre-escuro">
+                Ver a caixa do mês
+              </a>
+            </div>
+
+            <Link
+              href={url}
+              className="apertar group mt-14 flex max-w-md items-center gap-5 rounded-2xl border border-sobre-escuro/15 bg-sobre-escuro/5 p-4 hover:bg-sobre-escuro/10"
+            >
+              <div className="size-20 shrink-0 rounded-xl bg-sobre-escuro p-2" role="img" aria-label="QR do lote em destaque" dangerouslySetInnerHTML={{ __html: qr }} />
+              <div>
+                <span className="inline-block rounded-full border border-sobre-escuro/30 px-2.5 py-0.5 text-xs">Na caixa de {edicao.nome.split(" ")[0].toLowerCase()}</span>
+                <p className="mt-2 font-bold">
+                  {destaque.variedade}, {destaque.processo.toLowerCase()}
+                  {destaque.pontuacaoSCA && <span className="font-normal text-sobre-escuro/70">, {sca(destaque.pontuacaoSCA)} pts</span>}
+                </p>
+                <p className="text-sm text-sobre-escuro/70 group-hover:text-sobre-escuro">Escaneie ou toque para abrir a história</p>
+              </div>
+            </Link>
+          </div>
+
+          <div className="relative min-h-[320px] md:min-h-0">
+            <Image
+              src={foto("1610632380989-680fe40816c6", 900)}
+              alt="Xícara de café com grãos caindo sobre fundo escuro"
+              fill
+              priority
+              sizes="(min-width: 768px) 45vw, 100vw"
+              className="rounded-3xl object-cover"
+            />
+            <div aria-hidden className="absolute inset-0 rounded-3xl bg-gradient-to-t from-escuro/60 to-transparent" />
+          </div>
         </div>
       </section>
 
-      <section className="border-y border-linha bg-caixa">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <h2 className="max-w-xl text-3xl font-semibold tracking-tight">Da cooperativa à sua xícara, e de volta.</h2>
-          <ol className="relative mt-12 grid gap-10 md:grid-cols-4 md:gap-6">
-            <span aria-hidden className="absolute left-0 right-0 top-[7px] hidden h-px bg-tinta/40 md:block" />
+      {/* Cafés da caixa, com abas */}
+      <section id="cafes" className="bg-caixa">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <h2 className="text-4xl font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-5xl">Os cafés desta caixa</h2>
+          <p className="mb-10 mt-4 max-w-[52ch] text-tinta-2">
+            {edicao.nome}: dois lotes do {produtor.fazenda}, em {produtor.cidade} ({produtor.uf}). Mesma família, processos diferentes.
+          </p>
+          <CafesComAbas
+            cafes={doMes.map((l) => ({
+              id: l.id,
+              marcacao: l.marcacao,
+              variedade: l.variedade,
+              processo: l.processo,
+              altitude: l.altitude,
+              notas: l.notasSensoriais,
+              pontos: l.pontuacaoSCA ? sca(l.pontuacaoSCA) : undefined,
+            }))}
+          />
+        </div>
+      </section>
+
+      {/* Da lavoura à porta: texto + duas fotos */}
+      <section className="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+        <div>
+          <h2 className="text-4xl font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-5xl">Da lavoura à sua porta, e de volta.</h2>
+          <ol className="mt-10 space-y-6">
             {caminho.map(([t, d], i) => (
-              <li key={t} className="relative pl-7 md:pl-0 md:pt-8">
+              <li key={t} className="grid grid-cols-[auto_1fr] gap-4">
                 <span
                   aria-hidden
-                  className={`absolute left-0 top-1 size-3.5 rounded-full md:top-0 ${i === caminho.length - 1 ? "bg-marca" : "border-2 border-tinta bg-caixa"}`}
+                  className={`mt-1.5 size-3.5 rounded-full ${i === caminho.length - 1 ? "bg-marca" : "border-2 border-tinta"}`}
                 />
-                <h3 className="font-semibold">{t}</h3>
-                <p className="mt-2 leading-relaxed text-tinta-2">{d}</p>
+                <div>
+                  <h3 className="font-bold">{t}</h3>
+                  <p className="mt-1 leading-relaxed text-tinta-2">{d}</p>
+                </div>
               </li>
             ))}
           </ol>
         </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <h2 className="text-3xl font-semibold tracking-tight">Na caixa de {edicao.nome.toLowerCase()}</h2>
-        <p className="mt-3 max-w-[56ch] text-tinta-2">
-          Dois lotes do {produtor.fazenda}, em {produtor.cidade} ({produtor.uf}). Mesma família, processos diferentes:
-          prove lado a lado e veja a diferença.
-        </p>
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {doMes.map((l) => (
-            <Link
-              key={l.id}
-              href={`/p/${l.id}`}
-              className="apertar group block rounded-2xl bg-caixa p-6 hover:bg-linha"
-            >
-              <p className="font-mono text-sm text-tinta-2">Lote {l.marcacao}</p>
-              <h3 className="mt-2 text-xl font-semibold">
-                {l.variedade}, {l.processo.toLowerCase()}
-              </h3>
-              <p className="mt-1 text-tinta-2">{l.notasSensoriais.join(", ")}</p>
-              <p className="mt-5 text-sm font-medium text-marca underline-offset-4 group-hover:underline">
-                Conhecer quem plantou
-              </p>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto grid max-w-6xl gap-12 px-4 pb-20 sm:px-6 md:grid-cols-[1fr_1.1fr] md:items-center">
-        <div className="order-2 rounded-2xl bg-caixa p-6 sm:p-8 md:order-1">
-          <p className="mb-6 flex items-baseline justify-between font-mono text-xs text-tinta-2">
-            <span>Lote {demo.marcacao}</span>
-            <span>dados de exemplo</span>
-          </p>
-          <FichaProva consumidor={{ docura: 4.4, acidez: 2.6, corpo: 4.1, finalizacao: 3.5 }} ficha={demo.perfilFicha} />
-        </div>
-        <div className="order-1 md:order-2">
-          <h2 className="text-3xl font-semibold leading-tight tracking-tight">
-            Você prova, avalia e compara com o que o produtor descreveu.
-          </h2>
-          <p className="mt-5 max-w-[46ch] text-lg leading-relaxed text-tinta-2">
-            Nota para doçura, acidez, corpo e finalização, em dez segundos. A média de todos os assinantes vira um
-            retrato do lote, e a família produtora recebe esse retrato.
-          </p>
-        </div>
-      </section>
-
-      <section id="planos" className="border-t border-linha bg-caixa">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <h2 className="text-3xl font-semibold tracking-tight">Escolha sua caixa.</h2>
-          <p className="mt-3 text-tinta-2">Frete incluso. Pause ou cancele quando quiser.</p>
-          <div className="mt-10 divide-y divide-linha border-y border-linha">
-            {planos.map((p) => (
-              <div key={p.id} className="grid gap-3 py-6 md:grid-cols-[12rem_9rem_1fr_auto] md:items-center md:gap-8">
-                <h3 className="font-display text-3xl text-marca">{p.nome}</h3>
-                <p className="font-mono">
-                  {reais(p.preco)}
-                  <span className="text-tinta-2"> /mês</span>
-                </p>
-                <p className="max-w-[56ch] leading-relaxed text-tinta-2">{p.descricao}</p>
-                <Link
-                  href={`/assinar?plano=${p.id}`}
-                  className={`apertar justify-self-start rounded-full px-5 py-2.5 text-sm font-medium ${
-                    "destaque" in p ? "bg-marca text-sobre-marca hover:bg-marca-forte" : "border border-marca text-marca hover:bg-marca hover:text-sobre-marca"
-                  }`}
-                >
-                  Assinar {p.nome}
-                </Link>
-              </div>
-            ))}
+        <div className="grid grid-cols-2 gap-4">
+          <div className="relative aspect-[3/4] overflow-hidden rounded-3xl">
+            <Image src={foto("1586095516671-d085ff58cdd4", 600)} alt="Cerejas de café maduras no pé" fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
+          </div>
+          <div className="relative mt-12 aspect-[3/4] overflow-hidden rounded-3xl">
+            <Image src={foto("1497515114629-f71d768fd07c", 600)} alt="Xícara de café sobre grãos torrados" fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <div className="grid gap-10 rounded-3xl bg-marca p-8 text-sobre-marca sm:p-12 md:grid-cols-[1.2fr_1fr] md:items-center">
+      {/* Diferencial: ficha de prova */}
+      <section className="border-t border-linha">
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 md:grid-cols-[1.1fr_1fr] md:items-center">
           <div>
-            <h2 className="text-3xl font-semibold leading-tight tracking-tight">É de uma cooperativa ou associação?</h2>
-            <p className="mt-5 max-w-[50ch] leading-relaxed text-sobre-marca/85">
-              Compramos lotes especiais do Norte Pioneiro, região com Denominação de Origem desde 2025. Vocês não pagam
-              nada: vendem o café e recebem de volta a opinião de cada assinante, lote por lote.
+            <h2 className="text-4xl font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-5xl">Você prova. O produtor fica sabendo.</h2>
+            <p className="mt-5 max-w-[46ch] text-lg leading-relaxed text-tinta-2">
+              Nota para doçura, acidez, corpo e finalização em dez segundos. A média dos assinantes vira o retrato do lote e vai para a família produtora.
             </p>
           </div>
-          <ul className="space-y-4">
-            {[
-              ["Venda direta", "Um comprador fixo para lotes especiais, todo mês."],
-              ["Opinião de quem bebeu", "A ficha de prova dos assinantes, para melhorar a próxima safra."],
-              ["Nome do produtor no pacote", "A história da família vai junto, em vez de virar commodity."],
-            ].map(([t, d]) => (
-              <li key={t} className="border-t border-sobre-marca/25 pt-4">
-                <p className="font-semibold">{t}</p>
-                <p className="mt-1 text-sm leading-relaxed text-sobre-marca/85">{d}</p>
+          <div className="rounded-3xl bg-caixa p-6 sm:p-8">
+            <p className="mb-6 flex items-baseline justify-between font-mono text-xs text-tinta-2">
+              <span>Lote {destaque.marcacao}</span>
+              <span>dados de exemplo</span>
+            </p>
+            <FichaProva consumidor={{ docura: 4.4, acidez: 2.6, corpo: 4.1, finalizacao: 3.5 }} ficha={destaque.perfilFicha} />
+          </div>
+        </div>
+      </section>
+
+      {/* Planos em faixa escura, como a vitrine de produtos da referência */}
+      <section id="planos" className="bg-escuro text-sobre-escuro">
+        <div className="mx-auto max-w-6xl px-4 py-20 text-center sm:px-6">
+          <h2 className="text-4xl font-extrabold tracking-[-0.03em] sm:text-5xl">Escolha sua caixa</h2>
+          <p className="mx-auto mt-4 max-w-[46ch] text-sobre-escuro/75">Frete incluso. Pause ou cancele quando quiser. A primeira caixa sai em novembro.</p>
+          <div className="mt-12 grid gap-5 text-left md:grid-cols-3">
+            {planos.map((p) => {
+              const destaquePlano = "destaque" in p;
+              return (
+                <div
+                  key={p.id}
+                  className={`flex flex-col rounded-3xl p-7 ${destaquePlano ? "bg-marca-no-escuro text-escuro" : "bg-sobre-escuro/8 ring-1 ring-sobre-escuro/15"}`}
+                >
+                  <h3 className="font-display text-4xl">{p.nome}</h3>
+                  <p className={`mt-1 text-sm ${destaquePlano ? "text-escuro/75" : "text-sobre-escuro/70"}`}>
+                    {p.pacotes} {p.pacotes === 1 ? "pacote" : "pacotes"} de 250 g por mês
+                  </p>
+                  <p className="mt-6 text-4xl font-extrabold tracking-tight">
+                    {reais(p.preco)}
+                    <span className="text-base font-medium opacity-70">/mês</span>
+                  </p>
+                  <p className={`mt-4 flex-1 text-sm leading-relaxed ${destaquePlano ? "text-escuro/80" : "text-sobre-escuro/75"}`}>{p.descricao}</p>
+                  <Link
+                    href={`/assinar?plano=${p.id}`}
+                    className={`apertar mt-7 rounded-full py-3 text-center font-semibold ${
+                      destaquePlano ? "bg-escuro text-sobre-escuro hover:bg-tinta" : "bg-marca-no-escuro text-escuro hover:bg-sobre-escuro"
+                    }`}
+                  >
+                    Assinar {p.nome}
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Depoimentos: só avaliações reais, nunca inventadas */}
+      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <h2 className="text-4xl font-extrabold tracking-[-0.03em] sm:text-5xl">Quem já provou</h2>
+        {avaliacoes.length === 0 ? (
+          <p className="mt-5 max-w-[50ch] text-lg text-tinta-2">
+            As primeiras avaliações chegam com a caixa de novembro. Cada uma vem de alguém que escaneou um pacote de verdade.
+          </p>
+        ) : (
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {avaliacoes.map((a) => (
+              <figure key={a.id} className="rounded-3xl bg-caixa p-6">
+                <Nota valor={a.nota} />
+                <blockquote className="mt-4 line-clamp-3 leading-relaxed">“{a.comentario}”</blockquote>
+                <figcaption className="mt-4 text-sm text-tinta-2">
+                  {[a.nome, a.cidade].filter(Boolean).join(", ") || "Assinante"}, lote {produtor.lotes.find((l) => l.id === a.loteId)?.marcacao}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* Cooperativas */}
+      <section id="cooperativas" className="mx-auto max-w-6xl px-4 pb-20 sm:px-6">
+        <div className="grid gap-8 rounded-3xl bg-caixa p-8 sm:p-12 md:grid-cols-[1.2fr_1fr] md:items-center">
+          <div>
+            <h2 className="text-3xl font-extrabold tracking-[-0.03em]">É de uma cooperativa ou associação?</h2>
+            <p className="mt-4 max-w-[50ch] leading-relaxed text-tinta-2">
+              Compramos lotes especiais do Norte Pioneiro, região com Denominação de Origem desde 2025. Vocês não pagam nada: vendem o café e recebem a opinião de cada assinante.
+            </p>
+          </div>
+          <ul className="space-y-3 text-sm">
+            {["Comprador fixo para lotes especiais", "Ficha de prova dos assinantes, lote por lote", "Nome da família no pacote, não commodity"].map((t) => (
+              <li key={t} className="flex items-start gap-3">
+                <span aria-hidden className="mt-1.5 size-2.5 shrink-0 rounded-full bg-marca" />
+                {t}
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      <footer className="mx-auto flex max-w-6xl flex-wrap justify-between gap-2 px-4 py-8 text-sm text-tinta-2 sm:px-6">
-        <span>GranumBox</span>
-        <Link href="/painel" className="underline underline-offset-4">
-          Curadoria
-        </Link>
-        <span>Genius Agro Hackathon 2026, desafio Café com Valor</span>
+      <footer className="bg-escuro text-sobre-escuro">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div>
+            <Logo altura={56} sobreEscuro />
+            <p className="mt-4 max-w-[34ch] text-sm leading-relaxed text-sobre-escuro/70">
+              Clube de assinatura de cafés especiais do Norte Pioneiro do Paraná, com a história de quem plantou em cada pacote.
+            </p>
+          </div>
+          {[
+            ["Assinatura", [["Planos", "#planos"], ["Assinar", "/assinar"]]],
+            ["Origem", [["Caixa do mês", "#cafes"], ["Cooperativas", "#cooperativas"]]],
+            ["Equipe", [["Curadoria", "/painel"], ["Modo apresentação", "/apresentar"]]],
+          ].map(([titulo, links]) => (
+            <div key={titulo as string}>
+              <p className="text-sm font-bold">{titulo as string}</p>
+              <ul className="mt-3 space-y-2 text-sm text-sobre-escuro/70">
+                {(links as string[][]).map(([t, h]) => (
+                  <li key={t}>
+                    <Link href={h} className="hover:text-sobre-escuro">
+                      {t}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="mx-auto max-w-6xl border-t border-sobre-escuro/15 px-4 py-6 text-xs text-sobre-escuro/60 sm:px-6">
+          Genius Agro Hackathon 2026, desafio Café com Valor. Fotos de clima: Unsplash.
+        </div>
       </footer>
     </main>
   );

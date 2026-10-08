@@ -10,6 +10,9 @@
   --marca-forte: #5a290b; /* hover/pressionado */
   --sobre-marca: #ffffff; /* texto sobre fundo marca */
   --linha: rgb(119 56 17 / 0.18);
+  --escuro: #1f1209; /* seções escuras (topo, planos, rodapé), iguais nos dois temas */
+  --sobre-escuro: #f3e6d8;
+  --marca-no-escuro: #d9925a;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -35,6 +38,9 @@
   --color-marca-forte: var(--marca-forte);
   --color-sobre-marca: var(--sobre-marca);
   --color-linha: var(--linha);
+  --color-escuro: var(--escuro);
+  --color-sobre-escuro: var(--sobre-escuro);
+  --color-marca-no-escuro: var(--marca-no-escuro);
   --font-sans: var(--font-montserrat);
   --font-display: var(--font-playfair);
   --font-mono: var(--font-plex-mono);
