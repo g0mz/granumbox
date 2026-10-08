@@ -31,15 +31,15 @@ Derivada das duas partes do logo.
 
 | Papel | Fonte | Uso |
 |---|---|---|
-| Assinatura | **Courgette** (o "granum" do logo) | Nome da fazenda na etiqueta, título do painel. No máximo **um** uso por tela, fora a assinatura "granumbox" no rodapé da etiqueta, que reproduz o logo. Nunca em parágrafo, botão ou rótulo. |
-| Interface | **Poppins** (o "box" do logo) | Títulos (600/700), texto (400), botões (500/600) |
+| Assinatura | **Playfair Display Black Italic** (o "granum" do logo, fonte confirmada pela equipe) | Nome da fazenda na etiqueta, título do painel. No máximo **um** uso por tela, fora a assinatura "granumbox" no rodapé da etiqueta, que reproduz o logo. Nunca em parágrafo, botão ou rótulo. |
+| Interface | **Montserrat** (o "box" do logo é Montserrat ExtraBold, confirmado pela equipe) | Títulos (600/700), texto (400), botões (500/600) |
 | Dados de rastreio | **IBM Plex Mono** | Código do lote, datas, números de nota. Só dados, nunca frases. |
 
 Escala: título de página `text-4xl` a `text-6xl` com `tracking-[-0.03em]` e `leading-[1.02]`; seção `text-3xl`; corpo `text-base` ou `text-lg` com `leading-relaxed` e no máximo `60ch` de largura.
 
 ## Forma
 
-Arredondada como a Poppins e o grão do logo. Regra fixa:
+Arredondada como o grão do logo e a geometria da Montserrat e o grão do logo. Regra fixa:
 - Botões e chips: `rounded-full`
 - Cartões e etiqueta: `rounded-2xl`
 - Campos e botões de escala: `rounded-xl`
@@ -75,4 +75,4 @@ Sombra só na etiqueta (é o único objeto "colado"), sempre tingida de marrom. 
 
 ## Proibido
 
-Fundo creme com serifa e terracota, gradientes, roxo, glassmorphism, três cartões iguais lado a lado, estrelas douradas, eyebrows em caixa alta acima de toda seção, Inter, Fraunces e qualquer fonte fora das três acima.
+Fundo creme com serifa e terracota, gradientes, roxo, glassmorphism, três cartões iguais lado a lado, estrelas douradas, eyebrows em caixa alta acima de toda seção, Inter, Fraunces, Poppins, Courgette e qualquer fonte fora das três acima.

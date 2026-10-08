@@ -35,8 +35,8 @@
   --color-marca-forte: var(--marca-forte);
   --color-sobre-marca: var(--sobre-marca);
   --color-linha: var(--linha);
-  --font-sans: var(--font-poppins);
-  --font-display: var(--font-courgette);
+  --font-sans: var(--font-montserrat);
+  --font-display: var(--font-playfair);
   --font-mono: var(--font-plex-mono);
 }
 

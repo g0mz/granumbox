@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Courgette, Poppins, IBM_Plex_Mono } from "next/font/google";
+import { Playfair_Display, Montserrat, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin"], weight: ["400", "500", "600", "700"] });
-const courgette = Courgette({ variable: "--font-courgette", subsets: ["latin"], weight: "400" });
+const montserrat = Montserrat({ variable: "--font-montserrat", subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
+const playfair = Playfair_Display({ variable: "--font-playfair", subsets: ["latin"], weight: "900", style: "italic" });
 const mono = IBM_Plex_Mono({ variable: "--font-plex-mono", subsets: ["latin"], weight: ["400", "500"] });
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${poppins.variable} ${courgette.variable} ${mono.variable} font-sans antialiased`}>
+      <body className={`${montserrat.variable} ${playfair.variable} ${mono.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>

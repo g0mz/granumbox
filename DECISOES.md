@@ -4,6 +4,8 @@ Registro curto do que foi decidido e por quê. Adicione no topo, com data.
 
 ## 2026-10-08
 
+**Fontes reais do logo confirmadas pela equipe:** "granum" é Playfair Display Black Italic e "box" é Montserrat ExtraBold. Substituem Courgette e Poppins, que tinham sido escolhidas a olho. Interface em Montserrat, assinatura em Playfair Display Black Italic.
+
 **Origem Controlada Café inspecionado (origemcontrolada.agtrace.ag, 08/10/2026).** Site institucional: carrossel no topo com degradê escuro, título em caixa alta, quatro cartões iguais com ícone (Autenticidade, Rastreabilidade, Produtores, Excelência), fundo com padrão de grãos e navegação pelas 15 IGs. O foco é a região e o selo, com texto genérico ("paixão", "excelência"). Comparado a ele, o GranumBox fala da família e do lote específico, tem uma ação para quem bebe (avaliar) e devolve essa opinião ao produtor. Evitamos de propósito os padrões vistos ali: quatro cartões iguais e texto promocional vago. O selo da IG continua sendo complementar, não concorrente.
 
 **Deploy adiado por decisão da equipe** ("sem deploy ainda"). A demo roda local com `npm --prefix app run dev`.
