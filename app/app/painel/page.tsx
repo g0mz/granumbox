@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Logo } from "@/components/Logo";
 import Link from "next/link";
 import QRCode from "qrcode";
 import { produtor, sca } from "@/lib/data";
@@ -27,8 +27,7 @@ export default async function Painel() {
     <main className="mx-auto max-w-6xl px-4 pb-20 sm:px-6">
       <nav className="flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-semibold text-marca">
-          <Image src="/logo.svg" alt="" width={32} height={32} />
-          GranumBox
+          <Logo altura={44} />
         </Link>
         <div className="flex items-center gap-3">
           <Link href="/apresentar" className="apertar hidden rounded-full border border-marca px-4 py-2 text-sm font-medium text-marca hover:bg-marca hover:text-sobre-marca sm:inline-block">

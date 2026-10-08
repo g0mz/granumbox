@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Logo } from "@/components/Logo";
 import QRCode from "qrcode";
 import { produtor, sca } from "@/lib/data";
 import { urlDoLote } from "@/lib/origem";
@@ -15,7 +15,7 @@ export default async function Apresentar() {
   return (
     <main className="mx-auto grid min-h-[100dvh] max-w-7xl items-center gap-12 px-6 py-10 lg:grid-cols-[auto_1fr] lg:gap-20">
       <div className="mx-auto w-full max-w-md text-center">
-        <Image src="/logo.svg" alt="GranumBox" width={120} height={120} className="mx-auto" priority />
+        <Logo altura={150} className="mx-auto w-fit" />
         <div className="mt-6 rounded-3xl bg-white p-6 shadow-[0_24px_60px_-28px_rgb(119_56_17/0.55)]">
           <div className="aspect-square w-full" role="img" aria-label="QR code do lote de demonstração" dangerouslySetInnerHTML={{ __html: qr }} />
         </div>

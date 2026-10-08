@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Logo } from "@/components/Logo";
 import { notFound } from "next/navigation";
 import { produtor } from "@/lib/data";
 import { acharLote, contarObrigados, listarAvaliacoes, resumo } from "@/lib/store";
@@ -31,8 +31,7 @@ export default async function PaginaLote({
   return (
     <main className="mx-auto max-w-xl pb-20">
       <div className="flex items-center gap-2 px-4 pt-5 text-sm">
-        <Image src="/logo.svg" alt="" width={26} height={26} />
-        <span className="font-medium">GranumBox</span>
+        <Logo altura={36} />
       </div>
 
       <div className="px-4 pt-5">

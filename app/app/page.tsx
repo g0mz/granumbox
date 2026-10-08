@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Logo } from "@/components/Logo";
 import Link from "next/link";
 import { edicao, planos, produtor, reais } from "@/lib/data";
 import { urlDoLote } from "@/lib/origem";
@@ -23,8 +23,7 @@ export default async function Home() {
     <main>
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <span className="flex items-center gap-2 font-semibold text-marca">
-          <Image src="/logo.svg" alt="" width={32} height={32} />
-          GranumBox
+          <Logo altura={44} />
         </span>
         <Link
           href="/assinar"
