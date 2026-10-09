@@ -198,12 +198,12 @@ export const planos = [
     // Sem foto do pacote de 500 g ainda: usa a do de 250 g, um pouco maior.
     id: "box", nome: "Box", gramas: 500, pacotes: 1, imagem: "/produto/pacote.webp", destaque: true,
     descricao: "Um pacote de 500 g por mês, para quem toma café todo dia.",
-    precos: { mensal: 94.9, trimestral: 89.9, semestral: 84.9, anual: 79.9 },
+    precos: { mensal: 89.9, trimestral: 84.9, semestral: 79.9, anual: 74.9 },
   },
   {
     id: "familia", nome: "Família", gramas: 1000, pacotes: 1, imagem: "/produto/pacote-1kg.webp",
     descricao: "Um pacote de 1 kg por mês, para a casa toda.",
-    precos: { mensal: 179.9, trimestral: 169.9, semestral: 159.9, anual: 149.9 },
+    precos: { mensal: 169.9, trimestral: 159.9, semestral: 149.9, anual: 139.9 },
   },
 ] as const;
 

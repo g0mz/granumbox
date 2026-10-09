@@ -4,7 +4,7 @@ Registro curto do que foi decidido e por quê. Adicione no topo, com data.
 
 ## 2026-10-08
 
-**Planos por peso e por período** (pedido da equipe). Individual 250 g R$ 49,90, Box 500 g R$ 94,90, Família 1 kg R$ 179,90 por mês. Trimestral, semestral e anual com ~5%, ~10% e ~15% de desconto, pagos à vista no início do período (preços terminando em ,90, tabela em `planos` em `lib/data.ts`). O Box é um pacote só de 500 g; sem foto dele ainda, usa a do de 250 g um pouco maior.
+**Planos por peso e por período** (pedido da equipe). Individual 250 g R$ 49,90, Box 500 g R$ 89,90, Família 1 kg R$ 169,90 por mês, frete à parte (revisado com o grupo; antes 94,90 e 179,90 com frete incluso). Trimestral, semestral e anual com ~5%, ~10% e ~15% de desconto, pagos à vista no início do período (preços terminando em ,90, tabela em `planos` em `lib/data.ts`). O Box é um pacote só de 500 g; sem foto dele ainda, usa a do de 250 g um pouco maior.
 
 **Avaliação em palavras do dia a dia** (pedido da equipe). O cliente não sabe o que é "corpo" ou "finalização". No formulário e nos gráficos: Doce, Sabor de fruta, Leve ou encorpado e Sabor depois de beber, cada um com uma pergunta direta ("O café lembra alguma fruta?"). Sem gíria nem comparação (a primeira versão, com "docinho" e "leite integral", foi recusada pela equipe). As chaves dos dados não mudaram. O termo técnico da prova SCA (`tecnico` em `ATRIBUTOS`) aparece só no painel de curadoria.
 

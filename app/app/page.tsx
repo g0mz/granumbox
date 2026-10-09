@@ -62,7 +62,7 @@ const etapas = [
   },
   {
     pos: "left-[50%] top-[88%]",
-    dado: "Frete incluso",
+    dado: "Pelo correio",
     titulo: "Chega na sua porta",
     texto: "Uma caixa por mês. Pause ou cancele quando quiser.",
     objeto: <Image src="/produto/caixa.webp" alt="Caixa GranumBox" width={1412} height={1114} sizes="200px" className={`h-auto w-full lg:w-44 ${sombra}`} />,
@@ -210,7 +210,7 @@ export default async function Home() {
             <figure className="relative md:absolute md:left-0 md:top-10 md:w-[58%]">
               <Image src="/produto/caixa.webp" alt="Caixa preta GranumBox com o logo em cobre e a frase clube de cafés especiais" width={1412} height={1114} sizes="(min-width: 768px) 58vw, 100vw" className="h-auto w-full drop-shadow-[0_40px_40px_rgb(31_18_9/0.35)]" />
               <Legenda className="md:absolute md:-top-6 md:left-[8%]" dado="A caixa">
-                Chega pelo correio, frete incluso. Vira porta-pacote na bancada.
+                Chega pelo correio. Vira porta-pacote na bancada.
               </Legenda>
             </figure>
 
@@ -291,7 +291,7 @@ export default async function Home() {
         <div className="mx-auto max-w-6xl px-4 py-24 text-center sm:px-6">
           <h2 className="text-5xl font-extrabold tracking-[-0.035em]">Escolha sua caixa</h2>
           <p className="mx-auto mt-4 max-w-[52ch] text-sm leading-relaxed text-creme-fixo/75">
-            Todos os cafés vêm do Norte Pioneiro do Paraná. Frete incluso. Quanto mais longo o plano, menor o preço por mês. A primeira caixa sai em novembro.
+            Todos os cafés vêm do Norte Pioneiro do Paraná. Frete calculado pelo CEP. Quanto mais longo o plano, menor o preço por mês. A primeira caixa sai em novembro.
           </p>
           <PlanosVitrine />
         </div>

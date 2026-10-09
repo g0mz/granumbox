@@ -95,7 +95,7 @@ export function FormAssinatura({ inicial, periodoInicial }: { inicial: PlanoId; 
         <p className="mt-3 text-sm text-tinta-2">
           {meses > 1
             ? `${reais(mes * meses)} cobrados a cada ${meses} meses (${reais(mes)} por mês).`
-            : "Cobrado todo mês. Pause ou cancele quando quiser."}
+            : "Cobrado todo mês. Pause ou cancele quando quiser."} Frete à parte, calculado pelo CEP.
         </p>
       </fieldset>
 
