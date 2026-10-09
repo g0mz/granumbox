@@ -178,12 +178,9 @@ export const produtorDoLote = (loteId: string) => produtores.find((p) => p.lotes
 export const sca = (n: number) => n.toLocaleString("pt-BR", { minimumFractionDigits: 1 });
 
 /* Assinatura: quem paga é o consumidor. Preços são proposta para o pitch.
-   Desconto por fidelidade, pago à vista no início do período: ~5% trimestral, ~10% semestral, ~15% anual. */
+   Por enquanto só existe o plano mensal, com preço fixo. */
 export const periodos = [
   { id: "mensal", nome: "Mensal", meses: 1 },
-  { id: "trimestral", nome: "Trimestral", meses: 3 },
-  { id: "semestral", nome: "Semestral", meses: 6 },
-  { id: "anual", nome: "Anual", meses: 12 },
 ] as const;
 
 export type PeriodoId = (typeof periodos)[number]["id"];
@@ -192,18 +189,18 @@ export const planos = [
   {
     id: "grao", nome: "Individual", gramas: 250, pacotes: 1, imagem: "/produto/pacote.webp",
     descricao: "Um pacote de 250 g por mês, de um produtor diferente a cada edição.",
-    precos: { mensal: 49.9, trimestral: 47.9, semestral: 44.9, anual: 42.9 },
+    precos: { mensal: 49.9 },
   },
   {
     // Sem foto do pacote de 500 g ainda: usa a do de 250 g, um pouco maior.
     id: "box", nome: "Box", gramas: 500, pacotes: 1, imagem: "/produto/pacote.webp", destaque: true,
     descricao: "Um pacote de 500 g por mês, para quem toma café todo dia.",
-    precos: { mensal: 89.9, trimestral: 84.9, semestral: 79.9, anual: 74.9 },
+    precos: { mensal: 89.9 },
   },
   {
     id: "familia", nome: "Família", gramas: 1000, pacotes: 1, imagem: "/produto/pacote-1kg.webp",
     descricao: "Um pacote de 1 kg por mês, para a casa toda.",
-    precos: { mensal: 169.9, trimestral: 159.9, semestral: 149.9, anual: 139.9 },
+    precos: { mensal: 169.9 },
   },
 ] as const;
 

@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { desconto, periodos, peso, planos, reais, type PeriodoId, type PlanoId } from "@/lib/data";
+import { periodos, peso, planos, reais, type PeriodoId, type PlanoId } from "@/lib/data";
 
 export function FormAssinatura({ inicial, periodoInicial }: { inicial: PlanoId; periodoInicial: PeriodoId }) {
   const [plano, setPlano] = useState<PlanoId>(inicial);
-  const [periodo, setPeriodo] = useState<PeriodoId>(periodoInicial);
+  const periodo: PeriodoId = periodoInicial;
   const [estado, setEstado] = useState<"livre" | "enviando" | "feito">("livre");
   const [erro, setErro] = useState("");
   const escolhido = planos.find((p) => p.id === plano)!;
@@ -73,26 +73,8 @@ export function FormAssinatura({ inicial, periodoInicial }: { inicial: PlanoId; 
       </fieldset>
 
       <fieldset>
-        <legend className="font-semibold">Período</legend>
-        <div role="radiogroup" aria-label="Período" className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {periodos.map((p) => {
-            const off = desconto(escolhido, p.id);
-            return (
-              <button
-                key={p.id}
-                type="button"
-                role="radio"
-                aria-checked={periodo === p.id}
-                onClick={() => setPeriodo(p.id)}
-                className={`apertar rounded-2xl border p-3 text-left ${periodo === p.id ? "border-marca bg-caixa" : "border-linha hover:border-marca"}`}
-              >
-                <span className="block font-semibold">{p.nome}</span>
-                <span className="block text-sm text-tinta-2">{off > 0 ? `${off}% de desconto` : "sem desconto"}</span>
-              </button>
-            );
-          })}
-        </div>
-        <p className="mt-3 text-sm text-tinta-2">
+        <legend className="font-semibold">Cobrança</legend>
+        <p className="mt-1 text-sm text-tinta-2">
           {meses > 1
             ? `${reais(mes * meses)} cobrados a cada ${meses} meses (${reais(mes)} por mês).`
             : "Cobrado todo mês. Pause ou cancele quando quiser."} Frete à parte, calculado pelo CEP.

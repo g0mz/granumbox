@@ -2,39 +2,17 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { desconto, periodos, peso, planos, reais, type PeriodoId } from "@/lib/data";
 
 const botao = "apertar inline-flex items-center justify-center gap-2 rounded-[4px] px-7 py-2.5 text-sm font-semibold";
 
-/** Cartões dos planos com seletor de período (mensal, trimestral, semestral, anual). */
+/** Cartões dos planos (só mensal, preço fixo). */
 export function PlanosVitrine() {
-  const [periodo, setPeriodo] = useState<PeriodoId>("mensal");
+  const periodo: PeriodoId = "mensal";
   const meses = periodos.find((p) => p.id === periodo)!.meses;
 
   return (
     <>
-      <div role="radiogroup" aria-label="Período da assinatura" className="mx-auto mt-10 inline-flex flex-wrap justify-center gap-1 rounded-[6px] bg-creme-fixo/10 p-1">
-        {periodos.map((p) => {
-          const off = desconto(planos[0], p.id);
-          return (
-            <button
-              key={p.id}
-              type="button"
-              role="radio"
-              aria-checked={periodo === p.id}
-              onClick={() => setPeriodo(p.id)}
-              className={`apertar rounded-[4px] px-4 py-2 text-sm font-semibold ${
-                periodo === p.id ? "bg-creme-fixo text-[#3a1a07]" : "text-creme-fixo/80 hover:text-creme-fixo"
-              }`}
-            >
-              {p.nome}
-              {off > 0 && <span className="ml-1.5 font-mono text-xs font-normal opacity-75">até −{desconto(planos[2], p.id)}%</span>}
-            </button>
-          );
-        })}
-      </div>
-
       <div className="mt-10 grid gap-6 md:grid-cols-3">
         {planos.map((p) => {
           const mes = p.precos[periodo];
