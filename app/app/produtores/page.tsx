@@ -136,7 +136,7 @@ export default async function Produtores() {
         <p className="font-mono text-xs uppercase tracking-[0.14em] text-marca">Quem planta</p>
         <h2 className="mt-3 text-4xl font-extrabold leading-[1] tracking-[-0.035em] sm:text-5xl">Conheça os produtores</h2>
         <p className="mt-6 max-w-[52ch] leading-relaxed text-tinta-2">
-          Famílias do Norte Pioneiro do Paraná, região com Denominação de Origem desde 2025.
+          Famílias do Norte Pioneiro do Paraná, região com a primeira indicação geográfica de café do Paraná reconhecida pelo INPI.
         </p>
       </section>
 

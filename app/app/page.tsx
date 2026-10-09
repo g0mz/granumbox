@@ -371,7 +371,7 @@ export default async function Home() {
             <p className="font-mono text-xs uppercase tracking-[0.14em] text-marca">De onde vem</p>
             <h2 className="mt-3 text-5xl font-extrabold leading-[1] tracking-[-0.035em]">Um só lugar: o Norte Pioneiro.</h2>
             <p className="mt-6 max-w-[42ch] leading-relaxed text-tinta-2">
-              Todo café da GranumBox vem de famílias do Norte Pioneiro do Paraná, região com Denominação de Origem desde 2025. Você sabe a cidade, o sítio e a altitude de cada pacote.
+              Todo café da GranumBox vem de famílias do Norte Pioneiro do Paraná, região com a primeira indicação geográfica de café do Paraná reconhecida pelo INPI. Você sabe a cidade, o sítio e a altitude de cada pacote.
             </p>
             <Link href="/produtores" className={`${botao} mt-8 bg-marca text-sobre-marca hover:bg-marca-forte`}>
               Conheça os produtores
